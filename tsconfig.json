@@ -3,7 +3,7 @@
     "target": "ES6",
     "module": "commonjs",
     "sourceMap": true,
-    "outDir": "./build",
+    "outDir": "dist",
     "rootDir": "./src",
     /* Strict Type-Checking Options */
     "strict": true,
@@ -14,7 +14,12 @@
     "esModuleInterop": true,
     /* Advanced Options */
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "src/*": [
+        "./src/*",
+      ]
+    }
   },
   "lib": ["es2016"],
   "include": ["src/**/*"],
