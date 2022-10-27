@@ -4,10 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node ."
+    "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
+    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node src/index.ts"
   },
   "_moduleAliases": {
     "~": "./src/"

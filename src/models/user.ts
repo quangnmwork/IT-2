@@ -5,6 +5,7 @@ import {
   PrimaryKey,
   AutoIncrement,
   DataType,
+  Unique,
 } from 'sequelize-typescript';
 
 @Table
@@ -13,6 +14,10 @@ export class User extends Model {
   @AutoIncrement
   @PrimaryKey
   userID: string;
+
+  @Column
+  @Unique
+  email: string;
 
   @Column
   username: string;
