@@ -1,9 +1,34 @@
 import {
+  Table,
+  Column,
   Model,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from 'sequelize';
-import { sequelize } from 'instances/db';
+  PrimaryKey,
+  AutoIncrement,
+  DataType,
+} from 'sequelize-typescript';
 
-// export interface UserModel extends Model<InferAttributes<UserModel>
+@Table
+export class User extends Model {
+  @Column
+  @AutoIncrement
+  @PrimaryKey
+  userID: string;
+
+  @Column
+  username: string;
+
+  @Column
+  password: string;
+
+  @Column
+  avatar: string;
+
+  @Column
+  location: string;
+
+  @Column({ type: DataType.TEXT })
+  description: string;
+
+  @Column
+  isAdmin: boolean;
+}

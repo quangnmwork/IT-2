@@ -10,15 +10,16 @@
     "noImplicitAny": true,
     /* Module Resolution Options */
     "moduleResolution": "node",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "esModuleInterop": true,
     /* Advanced Options */
     "skipLibCheck": true,
+    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "paths": {
-      "src/*": [
-        "./src/*",
-      ]
+      "~/*": ["./src/*"]
     }
   },
   "lib": ["es2016"],
