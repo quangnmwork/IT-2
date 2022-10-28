@@ -6,8 +6,10 @@ import {
   AutoIncrement,
   DataType,
   Unique,
+  HasMany
 } from 'sequelize-typescript';
-
+import { Comment } from './comment';
+import { Post } from './post';
 @Table
 export class User extends Model {
   @Column
@@ -36,4 +38,10 @@ export class User extends Model {
 
   @Column
   isAdmin: boolean;
+
+  @HasMany(() => Post)
+  posts: Post[];
+  
+  @HasMany(() => Comment)
+  comments: Comment[];
 }
