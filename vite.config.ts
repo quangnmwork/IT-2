@@ -1,55 +1,36 @@
-import path from "path";
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import Components from "unplugin-vue-components/vite";
-import AutoImport from "unplugin-auto-import/vite";
+import AutoImport from 'unplugin-auto-import/vite';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+
+import Components from 'unplugin-vue-components/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    host: "localhost",
-    port: 8888,
-    open: true,
-    https: false,
-    proxy: {},
+    port: 1234,
   },
   plugins: [
     vue({
-
       reactivityTransform: true,
     }),
+    Components({
+      deep: true,
+      dts: true,
 
-
+      dirs: ['src/*'],
+    }),
     AutoImport({
-      imports: [
-        "vue",
-        "vue-router",
-        "vue-i18n",
-        "vue/macros",
-        "@vueuse/head",
-        "@vueuse/core",
-      ],
-      dts: "types/auto-imports.d.ts",
-      dirs: [
-        "src/composables",
-        "src/store",
-      ],
+      imports: ['vue', 'vue/macros', '@vueuse/core'],
+
+      dirs: ['./src/*'],
       vueTemplate: true,
     }),
 
-    // https://github.com/antfu/unplugin-vue-components
-    Components({
-      extensions: ["vue"],
-      include: [/\.vue$/, /\.vue\?vue/],
-      dts: "types/components.d.ts",
-      exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
-    }),
   ],
   resolve: {
     alias: {
-      "~/": `${path.resolve(__dirname, "src")}/`,
+      '~': `${path.resolve(__dirname, 'src')}`,
     },
   },
-
-  
 });

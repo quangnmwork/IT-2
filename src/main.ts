@@ -1,11 +1,11 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import index from "./router";
-import Home from "~/views/home/Home.vue";
+import index from "./router/index";
+import App from "~/index.vue";
 import "~/styles/tailwind.css";
 
 
-const app = createApp(Home);
+const app = createApp(App);
 
 app.use(createPinia());
 
