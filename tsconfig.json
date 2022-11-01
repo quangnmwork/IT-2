@@ -1,28 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "sourceMap": true,
-    "outDir": "dist",
-    "rootDir": "./src",
-    /* Strict Type-Checking Options */
-    "strict": true,
-    "noImplicitAny": true,
-    /* Module Resolution Options */
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    /* Advanced Options */
-    "skipLibCheck": true,
-    "strictPropertyInitialization": false,
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "paths": {
-      "~/*": ["./src/*"]
-    }
-  },
-  "lib": ["es2016"],
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+   "compilerOptions": {
+      "lib": [
+         "es5",
+         "es6"
+      ],
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true
+   }
 }

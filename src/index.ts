@@ -1,34 +1,44 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import { sequelize } from './instances/db';
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { Request, Response } from "express";
+import { AppDataSource } from "./data-source";
+import { Routes } from "./routes";
 
-const app = express();
-const port = 4001;
+const config = {
+  port: 5000,
+};
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-
-sequelize
-  .authenticate()
+AppDataSource.initialize()
   .then(async () => {
-    console.log('database connected');
+    // create express app
+    const app = express();
+    app.use(bodyParser.json());
 
-    try {
-      await sequelize.sync({ force: true });
-    } catch (error) {
-      console.log(error);
-    }
+    Routes.forEach((route) => {
+      (app as any)[route.method](
+        route.route,
+        (req: Request, res: Response, next: Function) => {
+          const result = new (route.controller as any)()[route.action](
+            req,
+            res,
+            next
+          );
+          if (result instanceof Promise) {
+            result.then((result) =>
+              result !== null && result !== undefined
+                ? res.send(result)
+                : undefined
+            );
+          } else if (result !== null && result !== undefined) {
+            res.json(result);
+          }
+        }
+      );
+    });
+
+    app.listen(config.port);
+
+    console.log(`Express server has started on port ${config.port}`);
   })
-  .catch((e: any) => {
-    console.log(e.message);
-  });
+  .catch((error) => console.log(error));
 
-app.get('/', (req, res, next) => {
-  res.json('Hello world');
-});
-
-app.listen(port, () => {
-  console.log(`App is listening on port ${port}`);
-});
