@@ -1,8 +1,8 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import { Request, Response } from "express";
+import auth from "./routes/auth.routes";
+import user from "./routes/user.routes";
 import { AppDataSource } from "./data-source";
-import { Routes } from "./routes";
 
 const config = {
   port: 5000,
@@ -14,27 +14,8 @@ AppDataSource.initialize()
     const app = express();
     app.use(bodyParser.json());
 
-    Routes.forEach((route) => {
-      (app as any)[route.method](
-        route.route,
-        (req: Request, res: Response, next: Function) => {
-          const result = new (route.controller as any)()[route.action](
-            req,
-            res,
-            next
-          );
-          if (result instanceof Promise) {
-            result.then((result) =>
-              result !== null && result !== undefined
-                ? res.send(result)
-                : undefined
-            );
-          } else if (result !== null && result !== undefined) {
-            res.json(result);
-          }
-        }
-      );
-    });
+    app.use("/auth", auth);
+    app.use("/user", user);
 
     app.listen(config.port);
 

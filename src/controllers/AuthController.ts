@@ -6,9 +6,10 @@ import { validate } from "class-validator";
 import { User } from "../entity/User";
 import config from "../config/config";
 import { AppDataSource } from "../data-source";
+import { userRepository } from "../repository";
 
 export class AuthController {
-  async login(req: Request, res: Response) {
+  static async login(req: Request, res: Response) {
     //Check if username and password are set
     let { email, password } = req.body;
     if (!(email && password)) {
@@ -16,7 +17,7 @@ export class AuthController {
     }
 
     //Get user from database
-    const userRepository = AppDataSource.getRepository(User);
+
     let user: User;
     try {
       user = await userRepository.findOneOrFail({ where: { email } });
@@ -43,7 +44,7 @@ export class AuthController {
     });
   }
 
-  async changePassword(req: Request, res: Response) {
+  static async changePassword(req: Request, res: Response) {
     //Get ID from JWT
     const id = res.locals.jwtPayload.userId;
 
@@ -82,7 +83,7 @@ export class AuthController {
     res.status(204).send();
   }
 
-  async signup(req: Request, res: Response) {
+  static async signup(req: Request, res: Response) {
     //Get parameters from the body
     let { email, username, password } = req.body;
     let user = new User();
@@ -91,6 +92,7 @@ export class AuthController {
     user.username = username;
     user.password = password;
     user.isAdmin = false;
+    user.avatar = "";
 
     //Validade if the parameters are ok
     const errors = await validate(user);
@@ -103,7 +105,7 @@ export class AuthController {
     user.hashPassword();
 
     //Try to save. If fails, the username is already in use
-    const userRepository = AppDataSource.getRepository(User);
+
     try {
       await userRepository.save(user);
     } catch (e) {

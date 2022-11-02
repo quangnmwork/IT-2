@@ -24,7 +24,9 @@ export class User {
   username: string;
 
   @Column()
-  @Length(4, 100)
+  avatar: string;
+
+  @Column()
   password: string;
 
   @Column()
@@ -34,6 +36,12 @@ export class User {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column({ nullable: true })
+  location: string;
+
+  @Column({ nullable: true })
+  description: string;
 
   @Column()
   isAdmin: boolean;
