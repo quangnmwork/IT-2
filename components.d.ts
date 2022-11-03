@@ -7,8 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ForgotPassword: typeof import('./src/views/Auth/ForgotPassword/ForgotPassword.vue')['default']
     Home: typeof import('./src/views/home/Home.vue')['default']
     Login: typeof import('./src/views/Auth/Login/Login.vue')['default']
+    Register: typeof import('./src/views/Auth/Register/Register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
