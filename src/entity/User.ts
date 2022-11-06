@@ -5,9 +5,11 @@ import {
   Unique,
   UpdateDateColumn,
   CreateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { IsEmail, Length } from "class-validator";
 import * as bcrypt from "bcryptjs";
+import { Post } from "./Post";
 
 @Entity()
 @Unique(["email"])
@@ -45,6 +47,9 @@ export class User {
 
   @Column()
   isAdmin: boolean;
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 
   hashPassword() {
     this.password = bcrypt.hashSync(this.password, 8);

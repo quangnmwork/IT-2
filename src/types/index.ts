@@ -4,6 +4,11 @@ export interface MulterRequest extends Request {
   file: any;
 }
 
+export enum CATEGORY {
+  HOTEL,
+  RESTAURANT,
+  OTHER,
+}
 export interface IUser {
   id: number;
   email: string;
@@ -14,4 +19,15 @@ export interface IUser {
   isAdmin: boolean;
   location: string;
   description: string;
+}
+
+export interface IPost {
+  id: number;
+  user: number;
+  category: string;
+  content: string;
+  like: number;
+  createdAt: Date;
+  updatedAt: Date;
+  tags: string[];
 }

@@ -3,7 +3,6 @@ import { userRepository } from "../repository";
 import { hideProperty } from "../utils/hideProperty";
 import { MulterRequest, IUser } from "../types";
 import { imagekit } from "../utils/imageKit";
-import { resolve } from "path";
 
 export class UserController {
   static async getProfile(req: Request, res: Response, next: NextFunction) {
@@ -67,7 +66,7 @@ export class UserController {
     const getUser = async () => {
       try {
         const user = await userRepository.findOneBy({ id: +userId });
-        res.status(200).send(user);
+        res.status(200).send(hideProperty(user, "password"));
       } catch (err) {
         res.status(401).send(err);
       }
