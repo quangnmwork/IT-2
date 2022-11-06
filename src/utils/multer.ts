@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 
 export const upload = multer({
-  storage: multer.diskStorage({}),
+  storage: multer.memoryStorage(),
   fileFilter: (req: any, file, cb) => {
     let ext = path.extname(file.originalname);
     if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
