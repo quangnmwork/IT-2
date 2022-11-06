@@ -10,4 +10,5 @@ router.get("/", PostController.getAllPost);
 router.use(checkToken);
 
 router.post("/", PostController.addPost);
+router.get("/me", PostController.getMyPost);
 export default router;
