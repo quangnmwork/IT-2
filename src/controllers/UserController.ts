@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { userRepository } from "../repository";
 import { hideProperty } from "../utils/hideProperty";
 import { MulterRequest, IUser } from "../types";
-import { imagekit } from "../utils/imageKit";
+import { imagekit, imageKitUpload } from "../utils/imageKit";
 
 export class UserController {
   static async getProfile(req: Request, res: Response, next: NextFunction) {
@@ -35,10 +35,10 @@ export class UserController {
     const uploadImage = async () => {
       try {
         if (req.file) {
-          const { url } = await imagekit.upload({
-            file: req.file.buffer.toString("base64"), //required
-            fileName: req.file.originalname, //required
-          });
+          const { url } = await imageKitUpload(
+            req.file.buffer,
+            req.file.originalname
+          );
 
           const res = await userRepository.update(userId, { avatar: url });
           return res;

@@ -11,3 +11,15 @@ export const imagekit = new ImageKit({
   privateKey: config.privateKey,
   urlEndpoint: config.urlEndPoint,
 });
+
+export const imageKitUpload = async (buffer: Buffer, filename: string) => {
+  try {
+    const res = await imagekit.upload({
+      file: buffer.toString("base64"), //required
+      fileName: filename, //required
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

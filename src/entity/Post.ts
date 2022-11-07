@@ -22,6 +22,9 @@ export class Post {
   @CreateDateColumn()
   createdAt: Date;
 
+  @Column({ nullable: true })
+  thumbnail: string;
+
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
