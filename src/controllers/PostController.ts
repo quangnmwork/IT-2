@@ -54,4 +54,16 @@ export class PostController {
       res.status(401).send("There is something wrong");
     }
   }
+  static async getPostById(req:Request, res:Response)
+  {
+    const post = await postRepository.findOneBy({id: req.params.id as any})
+    res.status(200).send(post)
+  }
+  
+  static async deletePostById(req:Request , res:Response)
+  {
+    const postId = req.params.postId;
+    await postRepository.delete({id: postId as any})
+    res.status(204).send("Delete successfuly")
+  }
 }

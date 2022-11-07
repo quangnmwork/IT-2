@@ -8,6 +8,10 @@ const router = Router();
 
 router.get("/", PostController.getAllPost);
 
+router.get("/:id", PostController.getPostById);
+
+router.delete("/:postId", PostController.deletePostById);
+
 router.use(checkToken);
 
 router.post("/", upload.single("thumbnail"), PostController.addPost);
