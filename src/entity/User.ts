@@ -10,6 +10,7 @@ import {
 import { IsEmail, Length } from "class-validator";
 import * as bcrypt from "bcryptjs";
 import { Post } from "./Post";
+import { Comment } from "./Comment";
 
 @Entity()
 @Unique(["email"])
@@ -50,6 +51,9 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 
   hashPassword() {
     this.password = bcrypt.hashSync(this.password, 8);

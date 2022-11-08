@@ -5,8 +5,9 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
   ManyToOne,
+  OneToMany,
 } from "typeorm";
-
+import { Comment } from "./Comment";
 import { User } from "./User";
 
 @Entity()
@@ -18,9 +19,15 @@ export class Post {
   @ManyToOne(() => User, (user) => user.posts)
   user: User;
 
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[];
+
   @Column()
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column()
+  title: string;
 
   @Column({ nullable: true })
   thumbnail: string;

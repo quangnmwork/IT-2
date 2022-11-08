@@ -28,6 +28,8 @@ export interface IPost {
   content: string;
   like: number;
   createdAt: Date;
+  title: string;
+  thumbnail: string;
   updatedAt: Date;
   tags: string[];
 }
