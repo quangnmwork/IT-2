@@ -20,6 +20,10 @@ const routes: RouteRecordRaw[] = [
     path: '/forgot-password',
     component:() => import('~/views/Auth/ForgotPassword/ForgotPassword.vue')
   },  
+  {
+    path: '/userprofile',
+    component:() => import('~/views/UserProfile/UserProfile.vue')
+  },  
 
 ];
 
