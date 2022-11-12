@@ -37,6 +37,9 @@ module.exports = {
     'no-var': 'error',
     'no-undef': 'off',
     'vue/html-self-closing': 'off',
+ "vue/no-unused-vars": ["error", {
+        "ignorePattern": "^_"
+    }],
     'vue/singleline-html-element-content-newline': 'off',
   },
   globals: {

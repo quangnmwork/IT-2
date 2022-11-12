@@ -1,34 +1,23 @@
 <script setup lang="ts">
-import { email, required,sameAs, } from '@vuelidate/validators'
-import { useVuelidate } from '@vuelidate/core'
-const formRegister = reactive({
-  username:"",
-	email:"",
-	password:"",
-  confirmPassword:"",
+import { Form } from 'vee-validate';
+
+
+import * as yup from 'yup';
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  username: yup.string().required(),
+  password: yup.string().min(6).required(),
+  passwordConfirm: yup.string()
+    .required()
+    .oneOf([yup.ref('password')], 'Passwords do not match'),
+
 });
 
-const rules = computed(()=>{
-	return{
-  username:{required},
-	email: {required,email},
-	password: {required},
-  confirmPassword:{required, sameAs: sameAs(formRegister.password)}
-	}
-})
-
-
-const v$ = useVuelidate(rules, formRegister);
-const submitRegister = async () =>{
-	const rs = await v$.value.$validate();
-	if(rs){
-		alert('register success!');
-	}
-	else {
-		alert('error, register fail!');
-	}
-	
+function onSubmit(values: any) {
+  alert(JSON.stringify(values, null, 2));
 }
+
+
 </script>
 
 <template>
@@ -42,89 +31,55 @@ const submitRegister = async () =>{
     </div>
 
     <div
-      class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+      class="bg-white w-full md:max-w-md lg:max-w-full  md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
       flex items-center justify-center"
     >
       <div class="w-full h-100">
         <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12">Create an Account!</h1>
 
-        <form
+        <Form
+          v-slot="{errors}"
           class="mt-6"
+          :validation-schema="schema"
           method="POST"
-          @submit.prevent="submitRegister"
+          @submit="onSubmit"
         >
-          <div>
-            <label class="block text-gray-700">Username</label>
-            <input
-              id=""
-              
-              type="text"
-              name="username"
-              placeholder="Enter Username"
-              class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-              autofocus
-              
-              required
-            >
-          </div>
-          <div>
-            <label class="block text-gray-700">Email Address</label>
-            <input
-              id=""
-              
-              type="email"
-              name=""
-              placeholder="Enter Email Address"
-              class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-              autofocus
-             
-              required
-            >
-          </div>
-
-          <div class="mt-4">
-            <label class="block text-gray-700">Password</label>
-            <input
-              id=""
-              type="password"
-              name=""
-              placeholder="Enter Password"
-              minlength="6"
-              class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-              focus:bg-white focus:outline-none"
-              required
-            >
-          </div>
-          <div class="mt-4">
-            <label class="block text-gray-700">Confirm Password</label>
-            <input
-              id=""
-              v-model="formRegister.confirmPassword"
-              type="password"
-              name=""
-              placeholder="Enter Confirm Password"
-              minlength="6"
-              class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-              focus:bg-white focus:outline-none"
-              required
-            >
-          </div>
-
-          
-
+          <TextInput
+            name="email"
+            type="email"
+            label="E-mail"
+            placeholder="Your email address"
+          />
+          <TextInput
+            name="username"
+            type="text"
+            label="Full Name"
+            placeholder="Your Name"
+          />
+    
+          <TextInput
+            name="password"
+            type="password"
+            label="Password"
+            placeholder="Your password"
+          />
+          <TextInput
+            name="passwordConfirm"
+            type="password"
+            label="Confirm Password"
+            placeholder="Type it again"
+          />
           <button
             type="submit"
             class="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
             px-4 py-3 mt-6"
+            :class="Object.keys(errors).length>0 ? 'cursor-not-allowed ' : ''"
+            :disabled="Object.keys(errors).length>0"
           >
             Register
           </button>
-        </form>
-
+        </Form>
         <hr class="my-6 border-gray-300 w-full">
-
-        
-
         <p class="mt-8">
           Already have an account?  <RouterLink
             to="/login"
