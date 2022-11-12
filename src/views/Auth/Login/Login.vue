@@ -1,15 +1,31 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import { Form } from 'vee-validate';
+import { Form, } from 'vee-validate';
 import * as yup from 'yup';
+import { useMutation } from '@tanstack/vue-query';
+import { login } from '~/services/auth';
+
+
+
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(6).required(),
 
 });
 
-function onSubmit(values: any) {
-  alert(JSON.stringify(values, null, 2));
+const { mutate } = useMutation({
+  mutationFn: login, 
+  onSuccess: async () => {
+    console.log("I'm first!")
+  },
+  onError: (error, variables, context) => {
+    // An error happened!
+    console.log(`rolling back optimistic update with id`);
+  },
+});
+
+const onSubmit = (values : any) => {
+  mutate(values)
 }
 
 
@@ -51,14 +67,14 @@ function onSubmit(values: any) {
             label="Password"
             placeholder="Your password"
           />
-        
+
 
           <button
             type="submit"
             class="w-full block bg-indigo-500 hover:bg-indigo-400 text-white font-semibold rounded-lg
             px-4 py-3 mt-6"
             :class="Object.keys(errors).length>0 ? 'cursor-not-allowed ' : ''"
-            :disabled="Object.keys(errors).length>0"
+            :disabled="Object.keys(errors).length > 0"
           >
             Log In
           </button>
