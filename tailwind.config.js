@@ -4,19 +4,12 @@ module.exports = {
   mode: 'jit',
   theme: {
     extend: {
-      colors: {
-
-      },
-      boxShadow: {
-
-      },
+      colors: {},
+      boxShadow: {},
     },
   },
 
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/line-clamp'),
-    // require('@tailwindcss/daisyui')
-  ],
+  plugins: [require('@tailwindcss/aspect-ratio'), require('@tailwindcss/line-clamp'), require('daisyui')],
   // daisyUI config (optional)
 };
+
