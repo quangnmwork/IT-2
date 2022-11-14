@@ -11,3 +11,14 @@ export interface UserSignup {
 export interface UserLoginResponse {
   token: string;
 }
+export interface UserProfile {
+  avatar: string;
+  createdAt: string;
+  description: string;
+  email: string;
+  id: number;
+  isAdmin: boolean;
+  location: string;
+  updatedAt: string;
+  username: string;
+}

@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import index from './router/index';
 import App from '~/index.vue';
 import '~/styles/tailwind.css';
+import '~/styles/nprogress.scss';
 
 import { VueQueryPlugin } from 'vue-query';
 import Antd from 'ant-design-vue';
