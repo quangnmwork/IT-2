@@ -17,6 +17,7 @@ specifiers:
   autoprefixer: ^10.4.12
   axios: ^1.1.3
   daisyui: ^2.31.0
+  dayjs: ^1.11.6
   eslint: ^8.23.1
   eslint-plugin-tailwindcss: ^3.6.2
   husky: ^8.0.1
@@ -45,6 +46,7 @@ dependencies:
   ant-design-vue: 3.2.15_vue@3.2.39
   axios: 1.1.3
   daisyui: 2.31.0_jhfe3rbur6kzimvcehnoniy6fy
+  dayjs: 1.11.6
   nprogress: 0.2.0
   pinia: 2.0.22_arz4dztosvwy2ghjrlh2wdhejm
   sass: 1.55.0

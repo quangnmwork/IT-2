@@ -7,9 +7,13 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']
+    Footer: typeof import('./src/layout/Footer.vue')['default']
     ForgotPassword: typeof import('./src/views/Auth/ForgotPassword/ForgotPassword.vue')['default']
     Home: typeof import('./src/views/home/Home.vue')['default']
     Login: typeof import('./src/views/Auth/Login/Login.vue')['default']
+    Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
+    PostList: typeof import('./src/components/PostList/PostList.vue')['default']
     Register: typeof import('./src/views/Auth/Register/Register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

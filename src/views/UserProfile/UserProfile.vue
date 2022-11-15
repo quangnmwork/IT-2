@@ -1,11 +1,26 @@
 <template>
-  <div class="bg-gray-100 min-h-screen">
-    <div class="w-full text-white bg-main-color">
+  <div class="bg-gray-100 min-h-screen py-5">
+    <div class="w-full text-white bg-main-color max-w-screen-xl px-4 mx-auto md:px-6 lg:px-8">
+      <button
+        class="btn btn-square bg-cyan-400 hover:bg-cyan-300 border-none"
+        @click="router.push('/')"
+      >
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="#ffff"
+            d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8h5Z"
+          />
+        </svg>
+      </button>
       <div
         x-data="{ open: false }"
-        class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8"
+        class="flex flex-col md:items-center justify-between md:flex-row"
       >
-        <div class="container mx-auto my-5 p-5">
+        <div class="container mx-auto my-5">
           <div class="md:flex no-wrap md:-mx-2">
             <!-- Left Side -->
             <div class="w-full md:w-3/12 md:mx-2">
@@ -33,7 +48,7 @@
                   </li>
                   <li class="flex items-center py-3">
                     <span>Member since</span>
-                    <span class="ml-auto">Nov 8, 2022</span>
+                    <span class="ml-auto">{{ memberSince }}</span>
                   </li>
                 </ul>
               </div>
@@ -166,13 +181,18 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { notification } from 'ant-design-vue';
 import { Form } from 'vee-validate';
-// import { useQuery } from '@tanstack/vue-query';
+import { useRouter } from 'vue-router';
+
 import { getProfile, updateProfile } from '~/services/user';
+
+const router = useRouter();
 
 const username = ref('Huy');
 const location = ref('Danang , Viet Nam');
 const description = ref('Hi my name is Quang');
+const memberSince = ref('');
 const email = ref('');
 const avatar = ref('');
 watchEffect(async () => {
@@ -182,6 +202,8 @@ watchEffect(async () => {
   description.value = res.description || '';
   email.value = res.email;
   avatar.value = res.avatar;
+
+  memberSince.value = res.createdAt.substring(0, 10);
 });
 
 const onSubmit = async () => {
@@ -194,6 +216,12 @@ const onSubmit = async () => {
     username.value = res.username;
     location.value = res.location || '';
     description.value = res.description;
+
+    notification.open({
+      type: 'success',
+      duration: 2,
+      message: 'Update profile successfully',
+    });
   } catch (error) {
     console.log(error);
   }
