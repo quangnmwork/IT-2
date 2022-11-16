@@ -26,11 +26,16 @@
             <div class="w-full md:w-3/12 md:mx-2">
               <!-- Profile Card -->
               <div class="bg-white p-3 border-t-4 border-cyan-300">
-                <div class="image overflow-hidden">
+                <div
+                  class="image overflow-hidden"
+                  @dragover.prevent
+                  @drop.prevent
+                >
                   <img
                     class="h-50 w-full mx-auto rounded-full"
                     alt=""
                     :src="avatar || 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'"
+                    @drop="dragFile"
                   />
                   <input
                     accept="image/*"
@@ -194,6 +199,7 @@ const location = ref('Danang , Viet Nam');
 const description = ref('Hi my name is Quang');
 const memberSince = ref('');
 const email = ref('');
+
 const avatar = ref('');
 watchEffect(async () => {
   const res = await getProfile();
@@ -205,7 +211,21 @@ watchEffect(async () => {
 
   memberSince.value = res.createdAt.substring(0, 10);
 });
-
+const dragFile = async (e: any) => {
+  try {
+    const formUpdate = new FormData();
+    formUpdate.append('avatar', e.dataTransfer.files[0]);
+    const res = await updateProfile(formUpdate);
+    notification.open({
+      type: 'success',
+      duration: 2,
+      message: 'Update avatar successfully',
+    });
+    avatar.value = res.avatar ? res.avatar : avatar.value;
+  } catch (error) {
+    console.log(error);
+  }
+};
 const onSubmit = async () => {
   try {
     const formUpdate = new FormData();

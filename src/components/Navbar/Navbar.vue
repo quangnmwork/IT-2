@@ -1,6 +1,11 @@
 <template>
   <nav className=" container px-8 py-5 lg:py-8 mx-auto xl:px-5 max-w-screen-lg flex flex-wrap justify-between md:gap-10 md:flex-nowrap border-b-2 border-b-cyan-300">
-    <span class="font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600">Pieceloka</span>
+    <span
+      class="font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600 cursor-pointer"
+      @click="router.go(0)"
+    >
+      Pieceloka
+    </span>
     <div class="flex items-center gap-3">
       <form class="flex items-center">
         <label
@@ -32,10 +37,91 @@
           />
         </div>
       </form>
-      <button class="btn bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 border-none font-bold background-animate"><span>Get started</span></button>
+      <button
+        v-if="!isLogin"
+        class="btn bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 border-none font-bold background-animate"
+        @click="router.push('/login')"
+      >
+        <span>Get started</span>
+      </button>
+      <template v-if="isLogin">
+        <button
+          class="btn btn-circle bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 border-none font-bold background-animate"
+          @click="router.push('/login')"
+        >
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ffff"
+              d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"
+            />
+          </svg>
+        </button>
+        <div class="dropdown dropdown-end">
+          <label
+            tabindex="0"
+            class="btn btn-ghost btn-circle avatar bg-cyan-400 border-none"
+          >
+            <div class="w-10 rounded-full">
+              <img :src="userProfile.avatar || 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/1200px-User_font_awesome.svg.png'" />
+            </div>
+          </label>
+          <ul
+            tabindex="0"
+            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52"
+          >
+            <li class="pointer-events-none">
+              <a>
+                Hi
+                <span class="font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 text-transparent bg-clip-text">{{ userProfile.username }}</span>
+              </a>
+            </li>
+            <li
+              class="visited:bg-none"
+              @click="router.push('/profile')"
+            >
+              <a class="justify-between">Profile</a>
+            </li>
+            <li
+              class=""
+              @click="onLogout"
+            >
+              <a>Logout</a>
+            </li>
+          </ul>
+        </div>
+      </template>
     </div>
   </nav>
 </template>
+<script lang="ts" setup>
+import { useRouter } from 'vue-router';
+import { getProfile } from '~/services/user';
+import { UserProfile } from '~/types';
+const userProfile = reactive<Partial<UserProfile>>({});
+const isLogin = ref(false);
+
+const router = useRouter();
+
+const onLogout = () => {
+  isLogin.value = false;
+  localStorage.removeItem('auth');
+};
+
+watchEffect(async () => {
+  try {
+    const res = await getProfile();
+    isLogin.value = true;
+    userProfile.avatar = res.avatar;
+    userProfile.username = res.username;
+  } catch (error) {
+    console.log(error);
+  }
+});
+</script>
 <style scoped>
 .background-animate {
   background-size: 400%;
