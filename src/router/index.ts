@@ -16,11 +16,16 @@ const routes: RouteRecordRaw[] = [
     component: () => import('~/views/Auth/Login/Login.vue'),
   },
   { name: 'register', path: '/register', component: () => import('~/views/Auth/Register/Register.vue') },
-  { name: 'forgotpassword', path: '/forgot-password', component: () => import('~/views/Auth/ForgotPassword/ForgotPassword.vue') },
+  { name: 'forgot-password', path: '/forgot-password', component: () => import('~/views/Auth/ForgotPassword/ForgotPassword.vue') },
   {
     name: 'profile',
     path: '/profile',
     component: () => import('~/views/UserProfile/UserProfile.vue'),
+  },
+  {
+    name: 'create-post',
+    path: '/create-post',
+    component: () => import('~/views/createPost/CreatePost.vue'),
   },
 ];
 

@@ -7,7 +7,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ASelect: typeof import('ant-design-vue/es')['Select']
     CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']
+    CreatePost: typeof import('./src/views/createPost/CreatePost.vue')['default']
     Footer: typeof import('./src/layout/Footer.vue')['default']
     ForgotPassword: typeof import('./src/views/Auth/ForgotPassword/ForgotPassword.vue')['default']
     Home: typeof import('./src/views/home/Home.vue')['default']
@@ -15,6 +17,7 @@ declare module '@vue/runtime-core' {
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
     PostList: typeof import('./src/components/PostList/PostList.vue')['default']
     Register: typeof import('./src/views/Auth/Register/Register.vue')['default']
+    RichText: typeof import('./src/components/RichText/RichText.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TextInput: typeof import('./src/components/TextInput/TextInput.vue')['default']

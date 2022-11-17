@@ -47,7 +47,7 @@
       <template v-if="isLogin">
         <button
           class="btn btn-circle bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 border-none font-bold background-animate"
-          @click="router.push('/login')"
+          @click="router.push('/create-post')"
         >
           <svg
             width="32"
