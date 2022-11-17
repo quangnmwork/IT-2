@@ -1,44 +1,44 @@
 <template>
-  <div v-if="editor">
-    <button
-      class="bg-cyan-400 p-2 focus:bg-cyan-500"
-      :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
-      @click.prevent="() => editor.chain().focus().toggleHeading({ level: 1 }).run()"
-    >
-      H1
-    </button>
-    <button
-      class="bg-cyan-400 p-2"
-      :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
-      @click.prevent="() => editor.chain().focus().toggleHeading({ level: 2 }).run()"
-    >
-      H2
-    </button>
-    <button
-      class="bg-cyan-400 p-2"
-      :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }"
-      @click.prevent="() => editor.chain().focus().toggleHeading({ level: 3 }).run()"
-    >
-      H3
-    </button>
+  <div>
+    <div v-if="editor">
+      <button
+        class="bg-cyan-400 p-2 focus:bg-cyan-500"
+        :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
+        @click.prevent="() => editor.chain().focus().toggleHeading({ level: 1 }).run()"
+      >
+        H1
+      </button>
+      <button
+        class="bg-cyan-400 p-2"
+        :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
+        @click.prevent="() => editor.chain().focus().toggleHeading({ level: 2 }).run()"
+      >
+        H2
+      </button>
+      <button
+        class="bg-cyan-400 p-2"
+        :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }"
+        @click.prevent="() => editor.chain().focus().toggleHeading({ level: 3 }).run()"
+      >
+        H3
+      </button>
 
-    <button
-      v-for="(btn, id) in buttonList"
-      :key="id"
-      class="bg-cyan-400 p-2"
-      :class="{ 'is-active': editor.isActive(btn.name) }"
-      @click.prevent="btn.onClick"
-    >
-      <span :class="btn.icon"></span>
-    </button>
+      <button
+        v-for="(btn, id) in buttonList"
+        :key="id"
+        class="bg-cyan-400 p-2"
+        @click.prevent="btn.onClick"
+      >
+        <span :class="btn.icon"></span>
+      </button>
+    </div>
+    <editor-content :editor="editor" />
   </div>
-  <editor-content :editor="editor" />
 </template>
 
 <script setup lang="ts">
 import StarterKit from '@tiptap/starter-kit';
-import BulletList from '@tiptap/extension-bullet-list';
-import ListItem from '@tiptap/extension-list-item';
+
 import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
 import { Editor, EditorContent } from '@tiptap/vue-3';
@@ -49,16 +49,7 @@ const editor = new Editor({
     TextAlign.configure({
       types: ['heading', 'paragraph'],
     }),
-    BulletList.configure({
-      HTMLAttributes: {
-        class: 'list-disc',
-      },
-    }),
-    ListItem.configure({
-      HTMLAttributes: {
-        class: 'list-decimal',
-      },
-    }),
+
     Image.configure({
       HTMLAttributes: {
         class: 'max-w-full h-auto',
