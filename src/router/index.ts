@@ -27,6 +27,11 @@ const routes: RouteRecordRaw[] = [
     path: '/create-post',
     component: () => import('~/views/createPost/CreatePost.vue'),
   },
+  {
+    name: 'detail',
+    path: '/detail',
+    component: () => import('~/views/Detail/Detail.vue'),
+  },
 ];
 
 const index = createRouter({
