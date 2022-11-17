@@ -22,3 +22,13 @@ export interface UserProfile {
   updatedAt: string;
   username: string;
 }
+
+export interface Post {
+  thumbnail: string;
+  title: string;
+  content: string;
+  tags: string[];
+  category: 'hotel' | 'restaurant';
+  updatedAt: string;
+  createdAt: string;
+}

@@ -33,7 +33,6 @@
     </button>
   </div>
   <editor-content :editor="editor" />
-  <button class="bg-cyan-400 hover:bg-cyan-300 border-none outline-none float-right mt-5 mb-3 px-5 py-3 text-white rounded-sm">Create</button>
 </template>
 
 <script setup lang="ts">
@@ -74,11 +73,17 @@ const editor = new Editor({
   },
 });
 
+const emits = defineEmits(['update:modelValue']);
+
 interface ButtonProps {
   onClick: any;
   name: string;
   icon: string;
 }
+
+onUpdated(() => {
+  emits('update:modelValue', editor.getHTML());
+});
 
 const buttonList: ButtonProps[] = [
   {

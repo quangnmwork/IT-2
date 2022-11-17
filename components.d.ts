@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ASelect: typeof import('ant-design-vue/es')['Select']
+    AUploadDragger: typeof import('ant-design-vue/es')['UploadDragger']
     CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']
     CreatePost: typeof import('./src/views/createPost/CreatePost.vue')['default']
     Footer: typeof import('./src/layout/Footer.vue')['default']
