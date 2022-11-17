@@ -164,6 +164,7 @@ p{
 .entry__content{
     padding-left: 100px;
     padding-right: 100px;
+    text-align: justify;
 }
 .drop-cap:first-letter {
   float: left;

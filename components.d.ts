@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']
+    Comment: typeof import('./src/components/Comment/Comment.vue')['default']
     CreatePost: typeof import('./src/views/createPost/CreatePost.vue')['default']
     Detail: typeof import('./src/views/Detail/Detail.vue')['default']
     Footer: typeof import('./src/layout/Footer.vue')['default']
