@@ -2,7 +2,7 @@
   <nav className=" container px-8 py-5 lg:py-8 mx-auto xl:px-5 max-w-screen-lg flex flex-wrap justify-between md:gap-10 md:flex-nowrap border-b-2 border-b-cyan-300">
     <span
       class="font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600 cursor-pointer"
-      @click="router.go(0)"
+      @click="router.push('/')"
     >
       Pieceloka
     </span>
