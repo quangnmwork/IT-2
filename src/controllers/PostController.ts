@@ -68,7 +68,7 @@ export class PostController {
         user: true,
         comments: true,
       },
-      where: {},
+      where: { id: +req.params.id },
     });
     res.status(200).send(post);
   }
