@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ASelect: typeof import('ant-design-vue/es')['Select']
     CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']
     Comment: typeof import('./src/components/Comment/Comment.vue')['default']
     CreatePost: typeof import('./src/views/createPost/CreatePost.vue')['default']

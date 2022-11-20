@@ -14,7 +14,7 @@ export interface UserLoginResponse {
 export interface UserProfile {
   avatar: string;
   createdAt: string;
-  description: string;
+  description?: string;
   email: string;
   id: number;
   isAdmin: boolean;
@@ -24,11 +24,15 @@ export interface UserProfile {
 }
 
 export interface Post {
-  thumbnail: string;
-  title: string;
-  content: string;
-  tags: string[];
+  thumbnail?: string;
+  title?: string;
+  content?: string;
+  tags?: string[];
   category: 'hotel' | 'restaurant';
   updatedAt: string;
   createdAt: string;
+}
+
+export interface AllPostResponse extends Post {
+  user: UserProfile;
 }
