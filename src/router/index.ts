@@ -32,6 +32,27 @@ const routes: RouteRecordRaw[] = [
     path: '/detail/:id',
     component: () => import('~/views/Detail/Detail.vue'),
   },
+  {
+    name: 'admin',
+    path: '/admin',
+    component: () => import('~/views/Admin/AdminHome.vue'),
+    
+  },
+  {
+    name: 'usermanager',
+    path: '/admin/usermanager',
+    component: () => import('~/views/Admin/UserMan/UserManager.vue'),
+  },
+  {
+    name: 'dashboard',
+    path: '/admin/dashboard',
+    component: () => import('~/views/Admin/DashBoard/DashBoard.vue'),
+  },
+  {
+    name: 'blogmanager',
+    path: '/admin/blogmanager',
+    component: () => import('~/views/Admin/Blogman/BlogManager.vue'),
+  },
 ];
 
 const index = createRouter({
