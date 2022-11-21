@@ -1,4 +1,37 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useQuery } from 'vue-query';
+import { useRoute } from 'vue-router';
+import { getDetailPost } from '~/services/post';
+
+const route = useRoute();
+
+const { data } = useQuery({ queryFn: () => getDetailPost(route.params.id as string) });
+type Comment = Record<string, string>;
+const comments = ref<Comment[]>([]);
+const submitting = ref<boolean>(false);
+const value = ref<string>('');
+const handleSubmit = () => {
+  if (!value.value) {
+    return;
+  }
+
+  submitting.value = true;
+
+  setTimeout(() => {
+    submitting.value = false;
+    comments.value = [
+      {
+        author: 'Han Solo',
+        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        content: value.value,
+        datetime: '10-9-2002',
+      },
+      ...comments.value,
+    ];
+    value.value = '';
+  }, 1000);
+};
+</script>
 
 <template>
   <Navbar />
@@ -6,92 +39,81 @@
     <div class="row content__page">
       <div class="bg-content">
         <img
-          class="img-page"
-          src="https://monngondathanh.com/wp-content/uploads/2017/07/Waterfront-Danang-Restaurant-Bar-Da-Nang-min.jpg"
+          class="w-full aspect-[16/9]"
+          :src="data?.thumbnail || 'https://cdn.sanity.io/images/cijrdavx/production/05951a0ec1a6ffc54f615ab160649e92fea982d0-800x764.png?rect=0,0,800,468&w=1920&q=75&fit=clip&auto=format'"
           alt=""
         />
       </div>
-      <div class="content__page-header entry__header">
-        <h1 class="entry__title">Restaurant A</h1>
+      <div class="text-center">
+        <span class="font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600">{{ data?.title }}</span>
       </div>
-
-      <div class="entry__content">
-        <p>
-          Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim mollit amet anim veniam dolor dolor irure velit commodo cillum sit nulla ullamco magna amet magna cupidatat qui
-          labore cillum sit in tempor veniam consequat non laborum adipisicing aliqua ea nisi sint.
-        </p>
-
-        <p>
-          Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim mollit amet anim veniam dolor dolor irure velit commodo cillum sit nulla ullamco magna amet magna cupidatat qui
-          labore cillum sit in tempor veniam consequat non laborum adipisicing aliqua ea nisi sint ut quis proident ullamco ut dolore culpa occaecat ut laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua
-          laborum mollit quis nostrud sed sed.
-        </p>
-
-        <img
-          class="img-page"
-          src="https://vietnamdiscovery.com/wp-content/uploads/2019/10/Sky-View-Restaurant.jpg"
-          alt=""
-        />
-
-        <h2>Large Heading</h2>
-
-        <p>
-          Harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus
-          <a href="http://#">omnis voluptas assumenda est</a>
-          id quod maxime placeat facere possimus, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et.
-        </p>
-
-        <blockquote>
-          <p>For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life. For God did not send his Son into the world to condemn the world, but in order that the world might be saved through him.</p>
-          <cite>John 3:16-17 ESV</cite>
-        </blockquote>
-
-        <p>
-          Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit
-          libero, a pharetra augue laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.
-        </p>
-
-        <h3>Smaller Heading</h3>
-
-        <p>
-          Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit
-          libero, a pharetra augue laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.
-        </p>
-
-        <p>
-          Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit
-          libero, a pharetra augue laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.
-        </p>
-
-        <p>
-          Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit
-          libero, a pharetra augue laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.
-        </p>
-      </div>
+      <!-- eslint-disable vue/no-v-html -->
+      <div
+        class="mt-10"
+        v-html="data?.content"
+      ></div>
     </div>
     <div className="px-8 py-8 mt-3 text-gray-500 rounded-2xl bg-gray-50 dark:bg-gray-900 dark:text-gray-400">
       <div className="flex flex-wrap items-start sm:space-x-6 sm:flex-nowrap">
         <div className="relative flex-shrink-0 w-24 h-24 mt-1 ">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/219/219969.png"
-            objectFit="cover"
-            alt="{author.name}"
+            :src="data?.user.avatar || 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'"
             placeholder="blur"
-            layout="fill"
-            className="rounded-full"
+            class="rounded-full w-full h-full object-cover"
           />
         </div>
         <div>
           <div className="mb-3">
-            <h4 className="text-lg font-medium text-gray-800 dark:text-gray-300">About Kim Loi</h4>
+            <h4 className="text-lg font-medium text-gray-800 dark:text-gray-300">About {{ data?.user.username }}</h4>
           </div>
-          <div>Kim Loi comes from Da Nang. She studies in Da Nang University of Technology and Science.</div>
-          <a href="#">View Profile</a>
+          <div>{{ data?.user.description || 'No description' }}</div>
         </div>
       </div>
     </div>
   </div>
-
+  <a-list
+    v-if="comments.length"
+    :data-source="comments"
+    :header="`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`"
+    item-layout="horizontal"
+  >
+    <template #renderItem="{ item }">
+      <a-list-item>
+        <a-comment
+          :author="item.author"
+          :avatar="item.avatar"
+          :content="item.content"
+          :datetime="item.datetime"
+        />
+      </a-list-item>
+    </template>
+  </a-list>
+  <a-comment>
+    <template #avatar>
+      <a-avatar
+        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        alt="Han Solo"
+      />
+    </template>
+    <template #content>
+      <a-form-item>
+        <a-textarea
+          v-model:value="value"
+          :rows="4"
+        />
+      </a-form-item>
+      <a-form-item>
+        <a-button
+          html-type="submit"
+          :loading="submitting"
+          type="primary"
+          @click="handleSubmit"
+        >
+          Add Comment
+        </a-button>
+      </a-form-item>
+    </template>
+  </a-comment>
   <Footer />
 </template>
 
@@ -99,10 +121,7 @@
 .bg-content {
   text-align: center;
 }
-.img-page {
-  width: 800px;
-  margin: auto auto;
-}
+
 .content__page {
   padding-bottom: 12px;
   padding-top: 20px;

@@ -1,5 +1,12 @@
 <template>
-  <div class="link-effect cursor-pointer">
+  <div
+    class="link-effect cursor-pointer"
+    @click="
+      () => {
+        router.push(`/detail/${props.post.id}`);
+      }
+    "
+  >
     <div
       class="relative overflow-hidden transition-all bg-gray-100 rounded-md hover:scale-105"
       :class="props.aspect == 'landscape' ? 'aspect-[16/9]' : 'aspect-[1.2]'"
@@ -37,8 +44,10 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
 import { AllPostResponse } from '~/types';
 
+const router = useRouter();
 const color = ['#fed7aa', '#fde68a', '#d9f99d', '#cffafe', '#fbcfe8'];
 const randomColor = color[Math.floor(Math.random() * color.length)];
 const styleObj = reactive({

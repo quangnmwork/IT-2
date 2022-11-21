@@ -21,7 +21,7 @@ const { data } = useQuery({
       />
       <PostList
         v-if="data?.length"
-        :post="data[0]"
+        :post="data[1]"
         aspect="landscape"
       />
     </div>

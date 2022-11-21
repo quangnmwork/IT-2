@@ -27,6 +27,7 @@ export interface Post {
   thumbnail?: string;
   title?: string;
   content?: string;
+  id: string | number;
   tags?: string[];
   category: 'hotel' | 'restaurant';
   updatedAt: string;

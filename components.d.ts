@@ -7,7 +7,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AAvatar: typeof import('ant-design-vue/es')['Avatar']
+    AButton: typeof import('ant-design-vue/es')['Button']
+    AComment: typeof import('ant-design-vue/es')['Comment']
+    AFormItem: typeof import('ant-design-vue/es')['FormItem']
+    AList: typeof import('ant-design-vue/es')['List']
+    AListItem: typeof import('ant-design-vue/es')['ListItem']
     ASelect: typeof import('ant-design-vue/es')['Select']
+    ATextarea: typeof import('ant-design-vue/es')['Textarea']
     CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']
     Comment: typeof import('./src/components/Comment/Comment.vue')['default']
     CreatePost: typeof import('./src/views/createPost/CreatePost.vue')['default']

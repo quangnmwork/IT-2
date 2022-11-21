@@ -13,6 +13,7 @@ app.use(Antd);
 app.use(createPinia());
 app.use(VueQueryPlugin);
 app.use(index);
-
-app.mount('#app');
+index.isReady().then(() => {
+  app.mount('#app');
+});
 

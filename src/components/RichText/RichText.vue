@@ -52,7 +52,7 @@ const editor = new Editor({
 
     Image.configure({
       HTMLAttributes: {
-        class: 'max-w-full h-auto',
+        class: 'max-w-full h-auto mx-auto',
       },
     }),
   ],

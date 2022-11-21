@@ -7,3 +7,6 @@ export const createPost = async (data: FormData) => {
 export const getAllPost = async () => {
   return (await axiosClient.get('/post')).data as AllPostResponse[];
 };
+export const getDetailPost = async (id: string | number) => {
+  return (await (await axiosClient.get(`/post/${id}`)).data)[0] as AllPostResponse;
+};

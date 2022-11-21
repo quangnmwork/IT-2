@@ -29,7 +29,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     name: 'detail',
-    path: '/detail',
+    path: '/detail/:id',
     component: () => import('~/views/Detail/Detail.vue'),
   },
 ];
