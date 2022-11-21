@@ -1,51 +1,30 @@
 <script setup lang="ts">
-    import { ref } from "vue";
-    import { useSidebar } from "./useSidebar";
+import { ref } from 'vue';
+import { useSidebar } from './useSidebar';
 
-    const { isOpen } = useSidebar();
-    const activeClass = ref(
-    "bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100"
-    );
-    const inactiveClass = ref(
-    "border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100"
-);
+const { isOpen } = useSidebar();
+const activeClass = ref('bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100');
+const inactiveClass = ref('border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100');
 </script>
 
 <template>
-    <div class="flex">
+  <div class="flex">
     <!-- Backdrop -->
     <div
+      class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"
       :class="isOpen ? 'block' : 'hidden'"
       @click="isOpen = false"
-      class="
-        fixed
-        inset-0
-        z-20
-        transition-opacity
-        bg-black
-        opacity-50
-        lg:hidden
-      "
     ></div>
     <!-- End Backdrop -->
 
     <div
       :class="isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-      class="
-        fixed
-        inset-y-0
-        left-0
-        z-30
-        w-64
-        overflow-y-auto
-        transition
-        duration-300
-        transform
-        bg-gray-900
-        lg:translate-x-0 lg:static lg:inset-0
-      "
+      class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0"
     >
-      <router-link class="flex items-center justify-center mt-8" to="/admin">
+      <router-link
+        class="flex items-center justify-center mt-8"
+        to="/admin"
+      >
         <div class="flex items-center">
           <svg
             class="w-8 h-8 ml-2 text-blue-500"
@@ -126,17 +105,17 @@
           <span class="mx-4">User Manager</span>
         </router-link>
 
-        
-
         <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Forms' ? activeClass : inactiveClass]"
           to="/admin/blogmanager"
         >
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"
-            />
+          <svg
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
             <path
               fill-rule="evenodd"
               d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
@@ -147,9 +126,6 @@
           <span class="mx-4">Blog Manager</span>
         </router-link>
 
-        
-        
-        
         <p class="pl-4 text-xs my-2 font-semibold mb-4 text-gray-400">About</p>
         <a
           target="_blank"

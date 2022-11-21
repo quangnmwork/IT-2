@@ -1,16 +1,7 @@
 <script setup lang="ts">
-import Sidebar from './SideBar/Sidebar.vue'
-import Header from './Header/Header.vue'
-import { computed } from 'vue'
-  import { useRouter } from 'vue-router'
-  
-  const defaultLayout = 'default'
-  
-  const { currentRoute } = useRouter()
-  
-  const layout = computed(
-    () => `${currentRoute.value.meta.layout || defaultLayout}-layout`
-  )
+// Day la layout cua trang admin nhan component lam content
+import Sidebar from './SideBar/Sidebar.vue';
+import Header from './Header/Header.vue';
 </script>
 
 <template>
@@ -22,9 +13,7 @@ import { computed } from 'vue'
 
       <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
         <div class="container mx-auto px-6 py-8">
-          <component :is="layout">
-            <router-view />
-          </component>
+          <slot name="content" />
         </div>
       </main>
     </div>
