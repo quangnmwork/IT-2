@@ -76,7 +76,7 @@ const inactiveClass = ref('border-gray-900 text-gray-500 hover:bg-gray-600 hover
         <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]"
-          to="/admin/usermanager"
+          to="/admin/user-manager"
         >
           <svg
             class="w-5 h-5"
@@ -108,7 +108,7 @@ const inactiveClass = ref('border-gray-900 text-gray-500 hover:bg-gray-600 hover
         <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Forms' ? activeClass : inactiveClass]"
-          to="/admin/blogmanager"
+          to="/admin/blog-manager"
         >
           <svg
             class="w-5 h-5"
@@ -151,4 +151,4 @@ const inactiveClass = ref('border-gray-900 text-gray-500 hover:bg-gray-600 hover
   </div>
 </template>
 
-<style scoped></style>
+    <style scoped></style>
