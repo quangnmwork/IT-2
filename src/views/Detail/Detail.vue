@@ -1,35 +1,43 @@
 <script setup lang="ts">
-import { useQuery } from 'vue-query';
+import { useMutation, useQuery } from 'vue-query';
 import { useRoute } from 'vue-router';
+import { useAuth } from '~/pinia/auth';
+import { addComment, getAllComment } from '~/services/comment';
 import { getDetailPost } from '~/services/post';
+import { CommentsResponse } from '~/types';
 
 const route = useRoute();
+const auth = useAuth();
 
-const { data } = useQuery({ queryFn: () => getDetailPost(route.params.id as string) });
-type Comment = Record<string, string>;
-const comments = ref<Comment[]>([]);
+const { data } = useQuery({ queryKey: 'posts', queryFn: () => getDetailPost(route.params.id as string) });
+const res = useMutation(() => getAllComment(route.params.id as string), { mutationKey: 'comment' });
+
+onMounted(() => {
+  res.mutate();
+});
+
+const comments = ref<CommentsResponse[]>([]);
 const submitting = ref<boolean>(false);
 const value = ref<string>('');
-const handleSubmit = () => {
-  if (!value.value) {
-    return;
-  }
 
-  submitting.value = true;
+watchEffect(() => {
+  console.log(res.data);
+  comments.value = res.data.value || [];
+});
 
-  setTimeout(() => {
+const handleSubmit = async () => {
+  try {
+    if (!value.value) {
+      return;
+    }
+    submitting.value = true;
+    if (value.value) await addComment(route.params.id as string, { content: value.value });
+  } catch (err) {
+    console.log(err);
+  } finally {
     submitting.value = false;
-    comments.value = [
-      {
-        author: 'Han Solo',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        content: value.value,
-        datetime: '10-9-2002',
-      },
-      ...comments.value,
-    ];
-    value.value = '';
-  }, 1000);
+    res.mutate();
+  }
 };
 </script>
 
@@ -70,50 +78,60 @@ const handleSubmit = () => {
         </div>
       </div>
     </div>
-  </div>
-  <a-list
-    v-if="comments.length"
-    :data-source="comments"
-    :header="`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`"
-    item-layout="horizontal"
-  >
-    <template #renderItem="{ item }">
-      <a-list-item>
+
+    <a-comment>
+      <template #avatar>
+        <a-avatar
+          :src="auth.user?.avatar"
+          alt="Han Solo"
+        />
+      </template>
+      <template #content>
+        <a-form-item>
+          <a-textarea
+            v-model:value="value"
+            :rows="4"
+          />
+        </a-form-item>
+        <a-form-item>
+          <a-button
+            html-type="submit"
+            :loading="submitting"
+            type="primary"
+            @click="handleSubmit"
+          >
+            Add Comment
+          </a-button>
+        </a-form-item>
+      </template>
+    </a-comment>
+    <a-list
+      v-if="comments.length"
+      :data-source="comments"
+      item-layout="horizontal"
+    >
+      <a-list-item
+        v-for="(comment, id) in comments"
+        :key="id"
+      >
         <a-comment
-          :author="item.author"
-          :avatar="item.avatar"
-          :content="item.content"
-          :datetime="item.datetime"
-        />
-      </a-list-item>
-    </template>
-  </a-list>
-  <a-comment>
-    <template #avatar>
-      <a-avatar
-        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        alt="Han Solo"
-      />
-    </template>
-    <template #content>
-      <a-form-item>
-        <a-textarea
-          v-model:value="value"
-          :rows="4"
-        />
-      </a-form-item>
-      <a-form-item>
-        <a-button
-          html-type="submit"
-          :loading="submitting"
-          type="primary"
-          @click="handleSubmit"
+          :author="comment.user.email"
+          :avatar="comment.user.avatar || 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'"
+          :content="comment.content"
         >
-          Add Comment
-        </a-button>
-      </a-form-item>
-    </template>
-  </a-comment>
+          <template
+            v-if="auth.user?.id === comment.user.id"
+            #actions
+          >
+            <div class="flex gap-3">
+              <i class="ri-delete-bin-line cursor-pointer hover:text-red-400"></i>
+            </div>
+          </template>
+        </a-comment>
+      </a-list-item>
+    </a-list>
+  </div>
+
   <Footer />
 </template>
 

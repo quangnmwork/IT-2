@@ -7,12 +7,18 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AAvatar: typeof import('ant-design-vue/es')['Avatar']
+    AButton: typeof import('ant-design-vue/es')['Button']
+    AComment: typeof import('ant-design-vue/es')['Comment']
     AdminBlogManager: typeof import('./src/views/Admin/AdminBlogManager.vue')['default']
     AdminDashboard: typeof import('./src/views/Admin/AdminDashboard.vue')['default']
     AdminHome: typeof import('./src/views/Admin/AdminHome.vue')['default']
     AdminUserManager: typeof import('./src/views/Admin/AdminUserManager.vue')['default']
+    AFormItem: typeof import('ant-design-vue/es')['FormItem']
+    AList: typeof import('ant-design-vue/es')['List']
+    AListItem: typeof import('ant-design-vue/es')['ListItem']
+    ATextarea: typeof import('ant-design-vue/es')['Textarea']
     Banner: typeof import('./src/views/Admin/UserMan/partials/Banner.vue')['default']
-    BlogManager: typeof import('./src/views/Admin/BlogMan/BlogManager.vue')['default']
     Breadcrumb: typeof import('./src/views/Admin/UserMan/partials/Breadcrumb.vue')['default']
     CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']
     Comment: typeof import('./src/components/Comment/Comment.vue')['default']

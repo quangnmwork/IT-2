@@ -37,3 +37,10 @@ export interface Post {
 export interface AllPostResponse extends Post {
   user: UserProfile;
 }
+export interface CommentsResponse {
+  id: string | number;
+  content?: string;
+  createdAt: string;
+  updatedAt: string;
+  user: UserProfile;
+}

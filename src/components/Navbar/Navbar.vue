@@ -99,13 +99,14 @@
 </template>
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
+import { useAuth } from '~/pinia/auth';
 import { getProfile } from '~/services/user';
 import { UserProfile } from '~/types';
 const userProfile = reactive<Partial<UserProfile>>({});
 const isLogin = ref(false);
 
 const router = useRouter();
-
+const auth = useAuth();
 const onLogout = () => {
   isLogin.value = false;
   localStorage.removeItem('auth');
@@ -117,6 +118,7 @@ watchEffect(async () => {
     isLogin.value = true;
     userProfile.avatar = res.avatar;
     userProfile.username = res.username;
+    auth.user = res;
   } catch (error) {
     console.log(error);
   }
