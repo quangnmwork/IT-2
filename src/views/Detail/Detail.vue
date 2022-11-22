@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { notification } from 'ant-design-vue';
 import { useMutation, useQuery } from 'vue-query';
 import { useRoute } from 'vue-router';
 import { useAuth } from '~/pinia/auth';
-import { addComment, getAllComment } from '~/services/comment';
+import { addComment, delComment, getAllComment } from '~/services/comment';
 import { getDetailPost } from '~/services/post';
 import { CommentsResponse } from '~/types';
 
@@ -36,6 +37,25 @@ const handleSubmit = async () => {
     console.log(err);
   } finally {
     submitting.value = false;
+    res.mutate();
+  }
+};
+
+const deleteComment = async (commentId: string | number) => {
+  try {
+    await delComment(route.params.id as string, commentId);
+    notification.open({
+      type: 'success',
+      duration: 2,
+      message: 'Delete comment successfully',
+    });
+  } catch (error) {
+    notification.open({
+      type: 'error',
+      duration: 2,
+      message: 'Delete comment failed ! Try again',
+    });
+  } finally {
     res.mutate();
   }
 };
@@ -124,7 +144,10 @@ const handleSubmit = async () => {
             #actions
           >
             <div class="flex gap-3">
-              <i class="ri-delete-bin-line cursor-pointer hover:text-red-400"></i>
+              <i
+                class="ri-delete-bin-line cursor-pointer hover:text-red-400"
+                @click.prevent="deleteComment(comment.id)"
+              ></i>
             </div>
           </template>
         </a-comment>
