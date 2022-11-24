@@ -75,7 +75,6 @@ const editor = new Editor({
 watch(
   () => content + (props.content || ''),
   (newVal) => {
-    editor.commands.setContent(props.content || '');
     const isSame = editor.getHTML() == newVal;
     if (isSame) return;
     else editor.commands.setContent(newVal);

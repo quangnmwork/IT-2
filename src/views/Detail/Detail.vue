@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { notification } from 'ant-design-vue';
 import { useMutation, useQuery } from 'vue-query';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAuth } from '~/pinia/auth';
 import { addComment, delComment, getAllComment } from '~/services/comment';
 import { getDetailPost } from '~/services/post';
@@ -9,6 +9,7 @@ import { CommentsResponse } from '~/types';
 
 const route = useRoute();
 const auth = useAuth();
+const router = useRouter();
 
 const { data } = useQuery({ queryKey: 'posts', queryFn: () => getDetailPost(route.params.id as string) });
 const res = useMutation(() => getAllComment(route.params.id as string), { mutationKey: 'comment' });
@@ -91,10 +92,29 @@ const deleteComment = async (commentId: string | number) => {
           />
         </div>
         <div>
-          <div className="mb-3">
-            <h4 className="text-lg font-medium text-gray-800 dark:text-gray-300">About {{ data?.user.username }}</h4>
+          <div class="flex justify-between w-full">
+            <div>
+              <div className="mb-3">
+                <h4 className="text-lg font-medium text-gray-800 dark:text-gray-300">About {{ data?.user.username }}</h4>
+              </div>
+              <div>{{ data?.user.description || 'No description' }}</div>
+            </div>
           </div>
-          <div>{{ data?.user.description || 'No description' }}</div>
+        </div>
+        <div
+          v-if="data?.user.id === auth.user?.id"
+          class="flex-1"
+        >
+          <button class="btn btn-circle bg-cyan-400 float-right">
+            <i
+              class="ri-pencil-line text-white"
+              @click.prevent="
+                () => {
+                  router.push(`/update-post/${route.params.id}`);
+                }
+              "
+            ></i>
+          </button>
         </div>
       </div>
     </div>
