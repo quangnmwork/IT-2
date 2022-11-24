@@ -43,6 +43,12 @@ import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
 import { Editor, EditorContent } from '@tiptap/vue-3';
 
+interface EditorProps {
+  content?: string;
+}
+const props = defineProps<EditorProps>();
+const content = ref('');
+
 const editor = new Editor({
   extensions: [
     StarterKit,
@@ -56,13 +62,25 @@ const editor = new Editor({
       },
     }),
   ],
-  content: `
-       <p>This is your editor</p>
-      `,
+
+  onUpdate({ editor }) {
+    content.value = editor.getHTML();
+  },
+  content: content.value,
   editorProps: {
     attributes: { class: 'border-2 border-cyan-400 focus:outline-none min-h-[400px]' },
   },
 });
+
+watch(
+  () => content + (props.content || ''),
+  (newVal) => {
+    editor.commands.setContent(props.content || '');
+    const isSame = editor.getHTML() == newVal;
+    if (isSame) return;
+    else editor.commands.setContent(newVal);
+  }
+);
 
 const emits = defineEmits(['update:modelValue']);
 

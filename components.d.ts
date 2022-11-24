@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     AFormItem: typeof import('ant-design-vue/es')['FormItem']
     AList: typeof import('ant-design-vue/es')['List']
     AListItem: typeof import('ant-design-vue/es')['ListItem']
+    ASelect: typeof import('ant-design-vue/es')['Select']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
     Banner: typeof import('./src/views/Admin/UserMan/partials/Banner.vue')['default']
     Breadcrumb: typeof import('./src/views/Admin/UserMan/partials/Breadcrumb.vue')['default']
@@ -39,6 +40,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Sidebar: typeof import('./src/views/Admin/SideBar/Sidebar.vue')['default']
     TextInput: typeof import('./src/components/TextInput/TextInput.vue')['default']
+    UpdatePost: typeof import('./src/views/updatePost/UpdatePost.vue')['default']
     UserManager: typeof import('./src/views/Admin/UserMan/UserManager.vue')['default']
     UserProfile: typeof import('./src/views/UserProfile/UserProfile.vue')['default']
   }

@@ -137,8 +137,14 @@ const deleteComment = async (commentId: string | number) => {
         <a-comment
           :author="comment.user.email"
           :avatar="comment.user.avatar || 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'"
-          :content="comment.content"
         >
+          <template #content>
+            <input
+              type="text"
+              disbaled
+              :value="comment.content"
+            />
+          </template>
           <template
             v-if="auth.user?.id === comment.user.id"
             #actions
