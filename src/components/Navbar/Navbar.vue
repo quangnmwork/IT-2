@@ -15,7 +15,10 @@
           Search
         </label>
         <div class="relative w-full">
-          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 cursor-pointer"
+            @click.prevent="router.push({ path: '/search', query: { inp: input } })"
+          >
             <svg
               aria-hidden="true"
               class="w-5 h-5 text-cyan-600 dark:text-gray-400"
@@ -32,6 +35,7 @@
           </div>
           <input
             id="simple-search"
+            v-model="input"
             type="text"
             class="bg-gray-50 border text-cyan-700 text-sm rounded-lg border-cyan-400 focus:outline-cyan-400 block w-full pl-10 p-2.5"
           />
@@ -107,6 +111,8 @@ const isLogin = ref(false);
 
 const router = useRouter();
 const auth = useAuth();
+const input = ref('');
+
 const onLogout = () => {
   isLogin.value = false;
   localStorage.removeItem('auth');

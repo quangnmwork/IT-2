@@ -9,6 +9,13 @@ const routes: RouteRecordRaw[] = [
 
     component: () => import('~/views/home/Home.vue'),
   },
+  {
+    name: 'search',
+    path: '/search',
+    props: (route) => ({ query: route.query.inp }),
+
+    component: () => import('~/views/Search/SearchHome.vue'),
+  },
 
   {
     name: 'login',

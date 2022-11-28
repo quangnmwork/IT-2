@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     RichText: typeof import('./src/components/RichText/RichText.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchHome: typeof import('./src/views/Search/SearchHome.vue')['default']
     Sidebar: typeof import('./src/views/Admin/SideBar/Sidebar.vue')['default']
     TextInput: typeof import('./src/components/TextInput/TextInput.vue')['default']
     UpdatePost: typeof import('./src/views/updatePost/UpdatePost.vue')['default']
