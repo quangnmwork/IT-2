@@ -25,9 +25,9 @@ export interface UserProfile {
 
 export interface Post {
   thumbnail?: string;
-  title?: string;
+  title: string;
   content?: string;
-  id: string | number;
+  id: number;
   tags?: string[];
   category: 'hotel' | 'restaurant';
   updatedAt: string;

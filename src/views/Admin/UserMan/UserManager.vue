@@ -19,7 +19,7 @@ watchEffect(async () => {
 });
 
 const userFilter = computed(() => {
-  const user = users.value.filter((u) => u.username.includes(searchKey.value));
+  const user = users.value.filter((u) => u.username.toLowerCase().includes(searchKey.value));
   return user;
 });
 </script>

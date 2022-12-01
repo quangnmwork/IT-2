@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     ASelect: typeof import('ant-design-vue/es')['Select']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
     Banner: typeof import('./src/views/Admin/partials/Banner.vue')['default']
+    BlogItem: typeof import('./src/views/Admin/BlogMan/BlogItem.vue')['default']
     BlogManager: typeof import('./src/views/Admin/BlogMan/BlogManager.vue')['default']
     Breadcrumb: typeof import('./src/views/Admin/partials/Breadcrumb.vue')['default']
     CategoryLabel: typeof import('./src/components/PostList/CategoryLabel.vue')['default']

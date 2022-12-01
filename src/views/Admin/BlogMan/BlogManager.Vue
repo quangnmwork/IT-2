@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { getAllPost } from '~/services/post';
 
-interface User {
-  name: string;
-  email: string;
-  location: string;
-  ID: string;
-}
-const users = ref<User[]>([...Array(1).keys()].map(() => testUser));
+import { AllPostResponse } from '~/types';
 
-watchEffect(() => {});
+const searchKey = ref('');
 
-const testUser: User = {
-  name: 'Huy Le',
-  email: 'huyle@gmail.com',
-  location: 'Da nang',
-  ID: '1',
-};
+const posts = ref<AllPostResponse[]>([]);
+
+watchEffect(async () => {
+  const res = await getAllPost();
+  posts.value = res;
+});
+
+const blogFilter = computed(() => {
+  const post = posts.value.filter((u) => u.title.toLowerCase().includes(searchKey.value));
+
+  return post;
+});
 </script>
 
 <template>
@@ -61,9 +62,10 @@ const testUser: User = {
           </span>
 
           <input
+            v-model="searchKey"
             class="w-32 pl-10 pr-4 py-2 text-indigo-600 border-gray-200 rounded-md sm:w-64 focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
             type="text"
-            placeholder="Search user"
+            placeholder="Search post"
           />
         </div>
       </div>
@@ -76,45 +78,18 @@ const testUser: User = {
             <thead>
               <tr>
                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">ID</th>
-                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Name</th>
-                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Location</th>
+                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Title</th>
+                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Created At</th>
+                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"></th>
               </tr>
             </thead>
 
             <tbody class="bg-white">
               <tr
-                v-for="(u, index) in users"
+                v-for="(_u, index) in blogFilter"
                 :key="index"
               >
-                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">{{ u.ID }}</span>
-                </td>
-                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10">
-                      <img
-                        class="w-10 h-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
-
-                    <div class="ml-4">
-                      <div class="text-sm font-medium leading-5 text-gray-900">
-                        {{ u.name }}
-                      </div>
-                      <div class="text-sm leading-5 text-gray-500">
-                        {{ u.email }}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-
-                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <div class="text-sm leading-5 text-gray-900">
-                    {{ u.location || 'NaN' }}
-                  </div>
-                </td>
+                <BlogItem :blog="blogFilter[index]" />
               </tr>
             </tbody>
           </table>
