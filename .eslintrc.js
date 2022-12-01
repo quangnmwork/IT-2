@@ -6,11 +6,7 @@ module.exports = {
     es2021: true,
   },
   parser: 'vue-eslint-parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 12,
     parser: '@typescript-eslint/parser',
@@ -54,11 +50,7 @@ module.exports = {
     es2021: true,
   },
   parser: 'vue-eslint-parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 12,
     parser: '@typescript-eslint/parser',
@@ -86,6 +78,7 @@ module.exports = {
     'no-undef': 'off',
     'vue/html-self-closing': 'off',
     'vue/singleline-html-element-content-newline': 'off',
+    'vue/comment-directive': 'off',
   },
   globals: {
     defineProps: 'readonly',

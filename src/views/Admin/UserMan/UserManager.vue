@@ -1,20 +1,18 @@
 <script setup lang="ts">
-    import { ref } from "vue";
-import Breadcrumb from "./partials/Breadcrumb.vue";
+import { ref } from 'vue';
+
 interface User {
   name: string;
   email: string;
   location: string;
   ID: string;
-  
 }
 
 const testUser: User = {
-  name: "Huy Le",
-  email: "huyle@gmail.com",
-  location: "Da nang",
-  ID: "1",
-  
+  name: 'Huy Le',
+  email: 'huyle@gmail.com',
+  location: 'Da nang',
+  ID: '1',
 };
 
 const users = ref<User[]>([...Array(1).keys()].map(() => testUser));
@@ -24,155 +22,72 @@ const users = ref<User[]>([...Array(1).keys()].map(() => testUser));
   <div>
     <Breadcrumb breadcrumb="User Manager" />
     <!--Banner get you to github repo-->
-    
-    
 
     <div class="mt-5">
       <div class="flex items-center">
-      <button
-        
-        class="text-gray-500 focus:outline-none lg:hidden"
-      >
-        <svg
-          class="w-6 h-6"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M4 6H20M4 12H20M4 18H11"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-
-      <div class="relative mx-4 lg:mx-0">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-          <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+        <button class="text-gray-500 focus:outline-none lg:hidden">
+          <svg
+            class="w-6 h-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
-              d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+              d="M4 6H20M4 12H20M4 18H11"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
           </svg>
-        </span>
+        </button>
 
-        <input
-          class="
-            w-32
-            pl-10
-            pr-4
-            py-2
-            text-indigo-600
-            border-gray-200
-            rounded-md
-            sm:w-64
-            focus:border-indigo-600
-            focus:ring
-            focus:ring-opacity-40
-            focus:ring-indigo-500
-          "
-          type="text"
-          placeholder="Search user"
-        />
+        <div class="relative mx-4 lg:mx-0">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+            <svg
+              class="w-5 h-5 text-gray-500"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+
+          <input
+            class="w-32 pl-10 pr-4 py-2 text-indigo-600 border-gray-200 rounded-md sm:w-64 focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
+            type="text"
+            placeholder="Search user"
+          />
+        </div>
       </div>
-    </div>
     </div>
 
     <div class="flex flex-col mt-8">
       <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div
-          class="
-            inline-block
-            min-w-full
-            overflow-hidden
-            align-middle
-            border-b border-gray-200
-            shadow
-            sm:rounded-lg
-          "
-        >
+        <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
           <table class="min-w-full">
             <thead>
               <tr>
-                <th
-                  class="
-                    px-6
-                    py-3
-                    text-xs
-                    font-medium
-                    leading-4
-                    tracking-wider
-                    text-left text-gray-500
-                    uppercase
-                    border-b border-gray-200
-                    bg-gray-50
-                  "
-                >
-                  Name
-                </th>
-                <th
-                  class="
-                    px-6
-                    py-3
-                    text-xs
-                    font-medium
-                    leading-4
-                    tracking-wider
-                    text-left text-gray-500
-                    uppercase
-                    border-b border-gray-200
-                    bg-gray-50
-                  "
-                >
-                  Location
-                </th>
-                <th
-                  class="
-                    px-6
-                    py-3
-                    text-xs
-                    font-medium
-                    leading-4
-                    tracking-wider
-                    text-left text-gray-500
-                    uppercase
-                    border-b border-gray-200
-                    bg-gray-50
-                  "
-                >
-                  ID
-                </th>
-                <!-- <th
-                  class="
-                    px-6
-                    py-3
-                    text-xs
-                    font-medium
-                    leading-4
-                    tracking-wider
-                    text-left text-gray-500
-                    uppercase
-                    border-b border-gray-200
-                    bg-gray-50
-                  "
-                >
-                  Role
-                </th> -->
+                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Name</th>
+                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Location</th>
+                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">ID</th>
+
                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
               </tr>
             </thead>
 
             <tbody class="bg-white">
-              <tr v-for="(u, index) in users" :key="index">
-                <td
-                  class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                >
+              <tr
+                v-for="(u, index) in users"
+                :key="index"
+              >
+                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
                       <img
@@ -193,71 +108,30 @@ const users = ref<User[]>([...Array(1).keys()].map(() => testUser));
                   </div>
                 </td>
 
-                <td
-                  class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                >
+                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="text-sm leading-5 text-gray-900">
                     {{ u.location }}
                   </div>
-                  
                 </td>
 
-                <td
-                  class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                >
-                  <span
-                    class="
-                      inline-flex
-                      px-2
-                      text-xs
-                      font-semibold
-                      leading-5
-                      text-green-800
-                      bg-green-100
-                      rounded-full
-                    "
-                    >{{ u.ID }}</span
-                  >
+                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                  <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">{{ u.ID }}</span>
                 </td>
 
-                <!-- <td
-                  class="
-                    px-6
-                    py-4
-                    text-sm
-                    leading-5
-                    text-gray-500
-                    border-b border-gray-200
-                    whitespace-nowrap
-                  "
-                >
-                  {{ u.role }}
-                </td> -->
-
-                <td
-                  class="
-                    px-6
-                    py-4
-                    text-sm
-                    font-medium
-                    leading-5
-                    text-right
-                    border-b border-gray-200
-                    whitespace-nowrap
-                  "
-                >
+                <td class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
                   <div class="flex justify-around">
                     <span class="text-yellow-500 flex justify-center">
-                      <a href="#" class="mx-2 px-2 rounded-md"
-                        ><svg
+                      <a
+                        href="#"
+                        class="mx-2 px-2 rounded-md"
+                      >
+                        <svg
                           xmlns="http://www.w3.org/2000/svg"
                           class="h-5 w-5 text-green-700"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
-                          <path
-                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"
-                          />
+                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                           <path
                             fill-rule="evenodd"
                             d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
