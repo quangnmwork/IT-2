@@ -7,3 +7,6 @@ export const updateProfile = async (data: FormData) => {
 export const getProfile = async () => {
   return (await axiosClient.get('/user/me')).data as UserProfile;
 };
+export const getAllUser = async () => {
+  return (await axiosClient.get('/user')).data as UserProfile[];
+};
