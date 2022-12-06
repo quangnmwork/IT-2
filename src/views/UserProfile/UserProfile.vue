@@ -156,21 +156,21 @@
                       <span class="tracking-wide">Post Blog</span>
                     </div>
                     <ul class="list-inside space-y-2">
-                      <li>
-                        <div class="text-cyan-500">Restaurant in DaNang</div>
-                        <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                      </li>
-                      <li>
-                        <div class="text-cyan-500">Hotel in DaNang.</div>
-                        <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                      </li>
-                      <li>
-                        <div class="text-cyan-500">Hotel in DaNang.</div>
-                        <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                      </li>
-                      <li>
-                        <div class="text-cyan-500">Hotel in DaNang.</div>
-                        <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <li
+                        v-for="(post, id) in postList"
+                        :key="id"
+                      >
+                        <div
+                          class="text-cyan-500 cursor-pointer"
+                          @click.prevent="
+                            () => {
+                              router.push(`/detail/${post.id}`);
+                            }
+                          "
+                        >
+                          {{ post.title }}
+                        </div>
+                        <div class="text-gray-500 text-xs">{{ post.createdAt.substring(0, 10) }}</div>
                       </li>
                     </ul>
                   </div>
@@ -191,6 +191,7 @@ import { Form } from 'vee-validate';
 import { useRouter } from 'vue-router';
 
 import { getProfile, updateProfile } from '~/services/user';
+import { Post } from '~/types';
 
 const router = useRouter();
 
@@ -198,6 +199,7 @@ const username = ref('Huy');
 const location = ref('Danang , Viet Nam');
 const description = ref('Hi my name is Quang');
 const memberSince = ref('');
+const postList = ref<Post[]>([]);
 const email = ref('');
 
 const avatar = ref('');
@@ -207,6 +209,7 @@ watchEffect(async () => {
   location.value = res.location || '';
   description.value = res.description || '';
   email.value = res.email;
+  postList.value = res.posts;
   avatar.value = res.avatar;
 
   memberSince.value = res.createdAt.substring(0, 10);

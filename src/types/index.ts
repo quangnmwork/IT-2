@@ -21,6 +21,8 @@ export interface UserProfile {
   location: string;
   updatedAt: string;
   username: string;
+
+  posts: Post[];
 }
 
 export interface Post {
