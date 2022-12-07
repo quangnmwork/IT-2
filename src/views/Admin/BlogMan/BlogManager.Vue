@@ -22,7 +22,7 @@ const blogFilter = computed(() => {
 
 <template>
   <div>
-    <Breadcrumb breadcrumb="User Manager" />
+    <Breadcrumb breadcrumb="Blog Manager" />
     <!--Banner get you to github repo-->
 
     <div class="mt-5">

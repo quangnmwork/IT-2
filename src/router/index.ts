@@ -1,68 +1,81 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
 import NProgress from 'nprogress';
+import Home from '~/views/home/Home.vue';
+import Register from '~/views/Auth/Register/Register.vue';
+import Login from '~/views/Auth/Login/Login.vue';
+import SearchHome from '~/views/Search/SearchHome.vue';
+import UserProfile from '~/views/UserProfile/UserProfile.vue';
+import CreatePost from '~/views/createPost/CreatePost.vue';
+import UpdatePost from '~/views/updatePost/UpdatePost.vue';
+import Detail from '~/views/Detail/Detail.vue';
+import AdminHome from '~/views/Admin/AdminHome.vue';
+import AdminUserManager from '~/views/Admin/AdminUserManager.vue';
+
+import AdminBlogManager from '~/views/Admin/AdminBlogManager.vue';
+import AdminDashboard from '~/views/Admin/AdminDashboard.vue';
 
 const routes: RouteRecordRaw[] = [
   {
     name: 'home',
     path: '/',
 
-    component: () => import('~/views/home/Home.vue'),
+    component: () => Home,
   },
   {
     name: 'search',
     path: '/search',
     props: (route) => ({ query: route.query.inp }),
 
-    component: () => import('~/views/Search/SearchHome.vue'),
+    component: () => SearchHome,
   },
 
   {
     name: 'login',
     path: '/login',
-    component: () => import('~/views/Auth/Login/Login.vue'),
+    component: () => Login,
   },
-  { name: 'register', path: '/register', component: () => import('~/views/Auth/Register/Register.vue') },
-  { name: 'forgot-password', path: '/forgot-password', component: () => import('~/views/Auth/ForgotPassword/ForgotPassword.vue') },
+  { name: 'register', path: '/register', component: () => Register },
+
   {
     name: 'profile',
     path: '/profile',
-    component: () => import('~/views/UserProfile/UserProfile.vue'),
+    component: () => UserProfile,
   },
   {
     name: 'create-post',
     path: '/create-post',
-    component: () => import('~/views/createPost/CreatePost.vue'),
+    component: () => CreatePost,
   },
   {
     name: 'update-post',
     path: '/update-post/:id',
-    component: () => import('~/views/updatePost/UpdatePost.vue'),
+    component: () => UpdatePost,
   },
   {
     name: 'detail',
     path: '/detail/:id',
-    component: () => import('~/views/Detail/Detail.vue'),
+    component: () => Detail,
   },
   {
     name: 'admin',
     path: '/admin',
-    component: () => import('~/views/Admin/AdminHome.vue'),
+    component: () => AdminHome,
   },
   {
     name: 'user-manager',
     path: '/admin/user-manager',
-    component: () => import('~/views/Admin/AdminUserManager.vue'), // lam tuong tu
+    component: () => AdminUserManager, // lam tuong tu
   },
   {
     name: 'dashboard',
     path: '/admin/dashboard',
-    component: () => import('~/views/Admin/AdminDashboard.vue'), // lam tuong tu nhu blog manager
+    component: () => AdminDashboard, // lam tuong tu nhu blog manager
   },
   {
     name: 'blog-manager',
     path: '/admin/blog-manager',
-    component: () => import('~/views/Admin/AdminBlogManager.vue'),
+    component: () => AdminBlogManager,
   },
 ];
 

@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { useMutation } from '@tanstack/vue-query';
 import { login } from '~/services/auth';
 import { useRouter } from 'vue-router';
-import { UserLoginResponse } from '~/types';
+import { UserLogin, UserLoginResponse } from '~/types';
 
 const router = useRouter();
 const schema = yup.object().shape({
@@ -18,9 +18,12 @@ const { handleSubmit, errors, values } = useForm({ validationSchema: schema });
 
 const { mutate, isLoading, isError } = useMutation({
   mutationFn: login,
-  onSuccess: async (data: UserLoginResponse) => {
+  onSuccess: async (data: UserLoginResponse, variables: UserLogin) => {
     localStorage.setItem('auth', data.token);
-    router.push('/');
+    // console.log(variables);
+    if (variables.email.includes('admin@')) {
+      router.push('/admin/dashboard');
+    } else router.push('/');
   },
   onError: async (error) => {
     // An error happened!

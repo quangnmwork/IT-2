@@ -1,8 +1,16 @@
 <template>
-  <nav class="text-sm font-semibold mb-6" aria-label="Breadcrumb">
+  <nav
+    class="text-sm font-semibold mb-6"
+    aria-label="Breadcrumb"
+  >
     <ol class="list-none p-0 inline-flex">
       <li class="flex items-center text-purple">
-        <a href="/admin" class="text-gray-500">Admin Home</a>
+        <a
+          href="/admin"
+          class="text-gray-500"
+        >
+          Admin Home
+        </a>
         <svg
           class="fill-current w-3 h-3 mx-3 text-blue-600"
           xmlns="http://www.w3.org/2000/svg"
@@ -13,18 +21,18 @@
           />
         </svg>
       </li>
-      <li :key="index" class="flex items-center">
-        <a :href="'/' + breadcrumb" class="text-gray-600">{{
-          breadcrumbName
-        }}</a>
+      <li class="flex items-center">
+        <a class="text-gray-600">
+          {{ breadcrumbName }}
+        </a>
       </li>
     </ol>
   </nav>
 </template>
 <script lang="ts" setup>
-import { defineProps, computed } from 'vue'
-const props = defineProps<{ breadcrumb: string }>()
+import { defineProps, computed } from 'vue';
+const props = defineProps<{ breadcrumb: string }>();
 const breadcrumbName = computed(() => {
-  return props.breadcrumb.toUpperCase()
-})
+  return props.breadcrumb.toUpperCase();
+});
 </script>
