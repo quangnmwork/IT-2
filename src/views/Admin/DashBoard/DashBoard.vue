@@ -18,19 +18,20 @@ watchEffect(async () => {
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'Data One',
-      backgroundColor: '#f87979',
-      data: [40, 39, 10, 40, 39, 80, 40],
-    },
-  ],
+  datasets: [{ label: 'Users', backgroundColor: '#f87979', data: [40, 39, 10, 40, 39, 80, 40] }],
 };
 
 const options = {
   responsive: true,
   maintainAspectRatio: false,
 };
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'username',
+    key: 'username',
+  },
+];
 </script>
 
 <template>
@@ -143,12 +144,45 @@ const options = {
       </div>
     </div>
   </div>
-  <div>
-    <!-- <Line
-      :data="data"
-      :options="options"
-    /> -->
+  <div class="mt-10 flex">
+    <div class="w-1/2">
+      <p class="uppercase font-bold text-xl">recent activity</p>
+      <div>
+        <Line
+          :data="data"
+          :options="options"
+        />
+      </div>
+    </div>
+    <div class="w-1/2">
+      <p class="uppercase font-bold text-xl">Top user</p>
+      <div>
+        <a-table
+          :columns="columns"
+          :data-source="users"
+        >
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'username'">
+              <div class="flex items-center gap-3">
+                <div>
+                  {{ record.username }}
+                </div>
+                <img
+                  :src="record.avatar || 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/1200px-User_font_awesome.svg.png'"
+                  class="w-10 h-10 rounded-full border-cyan-300 border-2 border-solid"
+                  alt=""
+                />
+              </div>
+            </template>
+          </template>
+        </a-table>
+      </div>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.admin-chart {
+  max-width: 50%;
+}
+</style>

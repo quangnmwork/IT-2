@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     AList: typeof import('ant-design-vue/es')['List']
     AListItem: typeof import('ant-design-vue/es')['ListItem']
     ASelect: typeof import('ant-design-vue/es')['Select']
+    ATable: typeof import('ant-design-vue/es')['Table']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
     Banner: typeof import('./src/views/Admin/partials/Banner.vue')['default']
     BlogItem: typeof import('./src/views/Admin/BlogMan/BlogItem.vue')['default']
