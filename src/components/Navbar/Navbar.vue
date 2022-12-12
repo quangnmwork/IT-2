@@ -120,11 +120,13 @@ const onLogout = () => {
 
 watchEffect(async () => {
   try {
-    const res = await getProfile();
-    isLogin.value = true;
-    userProfile.avatar = res.avatar;
-    userProfile.username = res.username;
-    auth.user = res;
+    if (localStorage.getItem('auth')) {
+      const res = await getProfile();
+      isLogin.value = true;
+      userProfile.avatar = res.avatar;
+      userProfile.username = res.username;
+      auth.user = res;
+    }
   } catch (error) {
     console.log(error);
   }

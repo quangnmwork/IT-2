@@ -1,12 +1,9 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <transition name="fade">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+  <RouterView :key="$route.fullPath" />
 </template>
 <script setup lang="ts">
 import { useQueryProvider } from 'vue-query';
+import { RouterView } from 'vue-router';
 
 useQueryProvider();
 </script>
