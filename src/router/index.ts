@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
 import Home from '~/views/home/Home.vue';
 import Register from '~/views/Auth/Register/Register.vue';
 import Login from '~/views/Auth/Login/Login.vue';
@@ -83,17 +83,17 @@ const index = createRouter({
   history: createWebHistory(),
   routes,
 });
-index.beforeEach((to, from) => {
-  if (!NProgress.isStarted()) {
-    NProgress.configure({ showSpinner: false, easing: 'ease', speed: 1000 });
+// index.beforeEach((to, from) => {
+//   if (!NProgress.isStarted()) {
+//     NProgress.configure({ showSpinner: false, easing: 'ease', speed: 1000 });
 
-    NProgress.set(0.1);
-    NProgress.inc(0.1);
-    NProgress.start();
-  }
-});
+//     NProgress.set(0.1);
+//     NProgress.inc(0.1);
+//     NProgress.start();
+//   }
+// });
 
-index.afterEach((to, from) => {
-  NProgress.done();
-});
+// index.afterEach((to, from) => {
+//   NProgress.done();
+// });
 export default index;
