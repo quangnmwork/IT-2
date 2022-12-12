@@ -11,6 +11,7 @@ export class UserController {
       where: {
         id: userId,
       },
+      relations: { posts: true },
     });
 
     if (myProfile) res.status(200).json(hideProperty(myProfile, "password"));
@@ -75,6 +76,11 @@ export class UserController {
     await uploadImage();
     await updateUser();
     await getUser();
+  }
+
+  static async getAllUser(req: Request, res: Response, next: NextFunction) {
+    const users = await userRepository.find();
+    res.status(200).send(users);
   }
 }
 

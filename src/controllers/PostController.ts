@@ -1,25 +1,28 @@
 import { Response, Request } from "express";
-import { FindOptionsWhere, Like } from 'typeorm';
+import { FindOptionsWhere, Like } from "typeorm";
 import { Post } from "../entity/Post";
 import { postRepository, userRepository } from "../repository";
 import { IPost, MulterRequest } from "../types";
 import { imageKitUpload } from "../utils/imageKit";
 export class PostController {
   static async getAllPost(req: Request, res: Response) {
-    const searchQuery = req.query.search_query;
-    let where: FindOptionsWhere<Post>[] = []; 
-    if (typeof searchQuery === 'string') {
-      where.push({ title: Like(`%${searchQuery}%`)});
-      where.push({ category: Like(`%${searchQuery}%`)});
+    const searchQuery = req.query.searchQuery;
+    let where: FindOptionsWhere<Post>[] = [];
+    if (searchQuery && searchQuery.length) {
+      where.push({ title: Like(`%${searchQuery}%`) });
+      where.push({ category: Like(`%${searchQuery}%`) });
+    } else {
+      where.push({ title: Like("%%") });
     }
+
     const allPost = await postRepository.find({
       where: where,
       relations: {
         user: true,
         comments: true,
       },
-    })
-    
+    });
+
     res.status(201).send(allPost);
   }
 
@@ -27,7 +30,9 @@ export class PostController {
     const userId = req.params["userId"] as any;
     const allPost = await postRepository.find({
       relations: {
-        user: true,
+        user: {
+          posts: true,
+        },
         comments: true,
       },
       where: { user: userId },
@@ -125,5 +130,4 @@ export class PostController {
     await postRepository.delete({ id: postId as any });
     res.status(204).send("Delete successfuly");
   }
- 
 }
