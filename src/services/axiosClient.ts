@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://it-2.up.railway.app',
   headers: { 'Content-Type': 'application/json' },
 });
 
