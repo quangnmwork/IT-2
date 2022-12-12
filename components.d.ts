@@ -34,6 +34,8 @@ declare module '@vue/runtime-core' {
     ForgotPassword: typeof import('./src/views/Auth/ForgotPassword/ForgotPassword.vue')['default']
     Header: typeof import('./src/views/Admin/Header/Header.vue')['default']
     Home: typeof import('./src/views/home/Home.vue')['default']
+    Loading: typeof import('./src/components/Loading/Loading.vue')['default']
+    Loanding: typeof import('./src/components/Loading/Loanding.vue')['default']
     Login: typeof import('./src/views/Auth/Login/Login.vue')['default']
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
     PostList: typeof import('./src/components/PostList/PostList.vue')['default']
