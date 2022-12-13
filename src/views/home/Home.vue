@@ -3,14 +3,23 @@ import { useQuery } from 'vue-query';
 import { getAllPost } from '~/services/post';
 
 const posts = ref<any[]>([]);
+const lengthAllPost = ref<number>(0);
 const loadingPost = ref<any[]>([]);
-const currentIndex = ref<number>(0);
-const jump = 3;
+
 const { data } = useQuery({
   queryFn: getAllPost,
   onSuccess: (data) => {
     posts.value = data.slice(2);
-    loadingPost.value.push(...posts.value.slice(0, 3));
+    lengthAllPost.value = posts.value.length;
+    let cnt = 3;
+    while (cnt > 0) {
+      if (posts.value.length) {
+        const element = posts.value.shift();
+
+        loadingPost.value.push(element);
+      }
+      cnt--;
+    }
 
     // console.log(data);
   },
@@ -22,10 +31,17 @@ useIntersectionObserver(target, async ([{ isIntersecting }], observerElement) =>
   targetIsVisible.value = isIntersecting;
 
   if (isIntersecting) {
-    currentIndex.value = currentIndex.value + jump;
-    // console.log(currentIndex.value);
     await new Promise((resolve) => setTimeout(resolve, 500));
-    loadingPost.value.push(...posts.value.slice(currentIndex.value, currentIndex.value + jump));
+    let cnt = 3;
+    while (cnt > 0 && posts.value.length) {
+      if (posts.value.length) {
+        const element = posts.value.shift();
+
+        loadingPost.value.push(element);
+      }
+      cnt--;
+    }
+    console.log(loadingPost.value);
   }
 });
 </script>
@@ -61,7 +77,7 @@ useIntersectionObserver(target, async ([{ isIntersecting }], observerElement) =>
       <div ref="target"></div>
       <div class="flex justify-center mt-10">
         <a-spin
-          v-show="targetIsVisible"
+          v-show="targetIsVisible && loadingPost.length !== lengthAllPost"
           size="large"
         />
       </div>
