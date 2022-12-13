@@ -101,7 +101,7 @@
                           class="px-4 py-2 focus:outline-cyan-400"
                           type="text"
                           name="email"
-                          value="quangnm@gmail.com"
+                          :value="email"
                         />
                       </div>
 
