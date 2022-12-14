@@ -41,7 +41,7 @@ useIntersectionObserver(target, async ([{ isIntersecting }], observerElement) =>
       }
       cnt--;
     }
-    console.log(loadingPost.value);
+    // console.log(loadingPost.value);
   }
 });
 </script>

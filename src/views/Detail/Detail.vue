@@ -23,7 +23,7 @@ const submitting = ref<boolean>(false);
 const value = ref<string>('');
 
 watchEffect(() => {
-  console.log(res.data);
+  // console.log(res.data);
   comments.value = res.data.value || [];
 });
 
@@ -73,13 +73,16 @@ const deleteComment = async (commentId: string | number) => {
           alt=""
         />
       </div>
+      <div class="flex justify-between mt-5">
+        <div><CategoryLabel :labels="data?.tags || []" /></div>
+      </div>
       <div class="text-center">
         <span class="font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600">{{ data?.title }}</span>
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <div
-        class="mt-10"
         v-html="data?.content"
+        class="mt-10"
       ></div>
     </div>
     <div className="px-8 py-8 mt-3 text-gray-500 rounded-2xl bg-gray-50 dark:bg-gray-900 dark:text-gray-400">
@@ -110,7 +113,7 @@ const deleteComment = async (commentId: string | number) => {
               class="ri-pencil-line text-white"
               @click.prevent="
                 () => {
-                  router.push(`/update-post/${route.params.id}`);
+                  router.push(`/update-post/${data?.id}`);
                 }
               "
             ></i>

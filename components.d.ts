@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     AAvatar: typeof import('ant-design-vue/es')['Avatar']
     AButton: typeof import('ant-design-vue/es')['Button']
     AComment: typeof import('ant-design-vue/es')['Comment']
+    ADivider: typeof import('ant-design-vue/es')['Divider']
     AdminBlogManager: typeof import('./src/views/Admin/AdminBlogManager.vue')['default']
     AdminDashboard: typeof import('./src/views/Admin/AdminDashboard.vue')['default']
     AdminHome: typeof import('./src/views/Admin/AdminHome.vue')['default']

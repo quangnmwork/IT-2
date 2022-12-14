@@ -15,7 +15,7 @@
           Search
         </label>
         <div class="relative w-full">
-          <div
+          <form
             class="absolute inset-y-0 left-0 flex items-center pl-3 cursor-pointer"
             @click.prevent="router.push({ path: '/search', query: { inp: input } })"
           >
@@ -32,12 +32,13 @@
                 clip-rule="evenodd"
               ></path>
             </svg>
-          </div>
+          </form>
           <input
             id="simple-search"
             v-model="input"
             type="text"
             class="bg-gray-50 border text-cyan-700 text-sm rounded-lg border-cyan-400 focus:outline-cyan-400 block w-full pl-10 p-2.5"
+            @keydown.enter.prevent="router.push({ path: '/search', query: { inp: input } })"
           />
         </div>
       </form>

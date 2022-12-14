@@ -71,10 +71,11 @@ import { useMutation } from '@tanstack/vue-query';
 import { getDetailPost, updatePost } from '~/services/post';
 
 import { notification } from 'ant-design-vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useQuery } from 'vue-query';
 
 const route = useRoute();
+const router = useRouter();
 
 const content = ref('');
 const myContent = ref('');
@@ -90,6 +91,7 @@ const { isLoading, mutate } = useMutation({
       duration: 2,
       message: 'Update Post Successfully',
     });
+    router.push(`/detail/${route.params.id}`);
   },
   onError: async (error) => {
     // An error happened!
