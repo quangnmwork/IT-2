@@ -81,10 +81,14 @@
             <label class="label">
               <span class="label-text font-bold text-lg">Content</span>
             </label>
-            <textarea
+            <!-- <textarea
               v-model="content"
               class="textarea textarea-bordered min-h-[200px] max-h-[500px]"
-            ></textarea>
+            ></textarea> -->
+            <RichText
+              v-model="myContent"
+              :content="content"
+            />
           </div>
         </form>
         <div class="modal-action">
@@ -96,6 +100,7 @@
           </label>
           <label
             class="btn btn-info text-white"
+            :class="isLoading ? 'loading' : ''"
             @click="onUpdatePost"
           >
             Save
@@ -120,8 +125,9 @@ const props = defineProps<BlogItemProps>();
 const content = ref(props.blog.content);
 const tags = ref<any>(props.blog.tags);
 const title = ref(props.blog.title);
+const myContent = ref('');
 
-const { mutate } = useMutation({
+const { mutate, isLoading } = useMutation({
   mutationFn: (inp: { id: number; data: FormData }) => updatePost(inp.id.toString(), inp.data),
   onSuccess: async () => {
     notification.open({
@@ -143,7 +149,7 @@ const { mutate } = useMutation({
 const onUpdatePost = async () => {
   const newPost = new FormData();
 
-  newPost.append('content', content.value as any);
+  newPost.append('content', myContent.value as any);
   newPost.append('title', title.value);
   newPost.append('tags', tags.value as any);
 

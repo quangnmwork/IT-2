@@ -47,6 +47,7 @@ interface EditorProps {
   content?: string;
 }
 const props = defineProps<EditorProps>();
+const emits = defineEmits(['update:modelValue']);
 const content = ref('');
 
 const editor = new Editor({
@@ -66,7 +67,7 @@ const editor = new Editor({
   onUpdate({ editor }) {
     content.value = editor.getHTML();
   },
-  content: content.value,
+  content: props.content,
   editorProps: {
     attributes: { class: 'border-2 border-cyan-400 focus:outline-none min-h-[400px]' },
   },
@@ -80,8 +81,6 @@ watch(
     else editor.commands.setContent(newVal);
   }
 );
-
-const emits = defineEmits(['update:modelValue']);
 
 interface ButtonProps {
   onClick: any;
