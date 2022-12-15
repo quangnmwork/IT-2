@@ -1,5 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import NProgress from 'nprogress';
 
 const routes: RouteRecordRaw[] = [
@@ -60,6 +59,7 @@ const routes: RouteRecordRaw[] = [
     path: '/admin/dashboard',
     component: () => import('~/views/Admin/AdminDashboard.vue'), // lam tuong tu nhu blog manager
   },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('~/components/NotFound/NotFound.vue') },
 ];
 
 const index = createRouter({

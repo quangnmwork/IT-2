@@ -1,5 +1,5 @@
 <template>
-  <RouterView />
+  <router-view></router-view>
 </template>
 <script setup lang="ts">
 import { useQueryProvider } from 'vue-query';

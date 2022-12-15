@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     Loading: typeof import('./src/components/Loading/Loading.vue')['default']
     Login: typeof import('./src/views/Auth/Login/Login.vue')['default']
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
+    NotFound: typeof import('./src/components/NotFound/NotFound.vue')['default']
     Observer: typeof import('./src/components/Observer/Observer.vue')['default']
     PostList: typeof import('./src/components/PostList/PostList.vue')['default']
     Register: typeof import('./src/views/Auth/Register/Register.vue')['default']

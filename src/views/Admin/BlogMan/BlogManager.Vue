@@ -86,7 +86,7 @@ const blogFilter = computed(() => {
             </thead>
 
             <tbody class="bg-white">
-              <BlogItem
+              <Blog-Item
                 v-for="(_u, index) in blogFilter || []"
                 :key="index"
                 :blog="blogFilter[index]"

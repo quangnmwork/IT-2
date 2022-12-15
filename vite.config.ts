@@ -20,6 +20,12 @@ export default defineConfig({
       dts: true,
       resolvers: [AntDesignVueResolver()],
       dirs: ['src/*'],
+      types: [
+        {
+          from: 'vue-router',
+          names: ['RouterLink', 'RouterView'],
+        },
+      ],
     }),
     AutoImport({
       imports: ['vue', 'vue/macros', '@vueuse/core'],
