@@ -51,7 +51,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'blog-manager-admin',
     path: '/admin/blog-manager',
-    component: () => import('~/views/Admin/AdminBlog.vue'),
+    component: () => import('~/views/Admin/BlogMan/BlogManager.vue'),
   },
   {
     name: 'dashboard',
