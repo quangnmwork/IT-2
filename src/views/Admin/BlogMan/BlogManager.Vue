@@ -23,10 +23,10 @@ const blogFilter = computed(() => {
 <template>
   <div>
     <Breadcrumb breadcrumb="Blog Manager" />
-
+    <p>test blog Manager</p>
     <!--Banner get you to github repo-->
 
-    <div class="mt-5">
+    <!-- <div class="mt-5">
       <div class="flex items-center">
         <button class="text-gray-500 focus:outline-none lg:hidden">
           <svg
@@ -87,7 +87,7 @@ const blogFilter = computed(() => {
 
             <tbody class="bg-white">
               <BlogItem
-                v-for="(_u, index) in blogFilter"
+                v-for="(_u, index) in blogFilter || []"
                 :key="index"
                 :blog="blogFilter[index]"
               />
@@ -95,6 +95,6 @@ const blogFilter = computed(() => {
           </table>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
