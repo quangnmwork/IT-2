@@ -5,4 +5,6 @@
     </template>
   </AdminHome>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BlogManager from './BlogMan/BlogManager.vue';
+</script>
