@@ -44,25 +44,21 @@ const routes: RouteRecordRaw[] = [
     path: '/detail/:id',
     component: () => import('~/views/Detail/Detail.vue'),
   },
-  {
-    name: 'admin',
-    path: '/admin',
-    component: () => import('~/views/Admin/AdminHome.vue'),
-  },
+
   {
     name: 'user-manager',
     path: '/admin/user-manager',
     component: () => import('~/views/Admin/AdminUserManager.vue'), // lam tuong tu
   },
   {
-    name: 'dashboard',
-    path: '/admin/dashboard',
-    component: () => import('~/views/Admin/AdminDashboard.vue'), // lam tuong tu nhu blog manager
-  },
-  {
     name: 'blog-manager',
     path: '/admin/blog-manager',
     component: () => import('~/views/Admin/AdminBlogManager.vue'),
+  },
+  {
+    name: 'dashboard',
+    path: '/admin/dashboard',
+    component: () => import('~/views/Admin/AdminDashboard.vue'), // lam tuong tu nhu blog manager
   },
 ];
 
