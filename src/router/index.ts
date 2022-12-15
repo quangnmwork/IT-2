@@ -5,7 +5,6 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'home',
     path: '/',
-
     component: () => import('~/views/home/Home.vue'),
   },
   {
@@ -52,7 +51,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'blog-manager',
     path: '/admin/blog-manager',
-    component: () => import('~/views/Admin/AdminBlogManager.vue'),
+    component: () => import('~/views/Admin/AdminUserManager.vue'),
   },
   {
     name: 'dashboard',

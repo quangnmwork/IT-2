@@ -1,7 +1,7 @@
 <template>
   <AdminHome>
     <template #content>
-      <BlogManager></BlogManager>
+      <BlogManager />
     </template>
   </AdminHome>
 </template>
