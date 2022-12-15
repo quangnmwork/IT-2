@@ -14,4 +14,4 @@ app.use(createPinia());
 app.use(VueQueryPlugin);
 app.use(index);
 
-app.mount('#app');
+router.isReady().then(() => app.mount('#app'));
