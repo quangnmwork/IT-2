@@ -121,7 +121,7 @@ const notificationOpen = ref(false);
                 <span class="font-bold ml-1">Admin</span>
               </div>
               <button
-                class="flex px-4 py-2 rounded-md text-sm text-gray-700 hover:bg-cyan-400 hover:text-white"
+                class="flex px-4 py-2 rounded-md text-sm text-gray-700 hover:bg-cyan-400 hover:text-white w-full"
                 @click.prevent="onLogout"
               >
                 <svg

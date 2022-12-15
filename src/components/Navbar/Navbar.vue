@@ -85,6 +85,13 @@
               </a>
             </li>
             <li
+              v-if="userProfile.email?.includes('admin')"
+              class="visited:bg-none"
+              @click="router.push('/admin/dashboard')"
+            >
+              <a class="justify-between">Dashboard</a>
+            </li>
+            <li
               class="visited:bg-none"
               @click="router.push('/profile')"
             >
@@ -126,6 +133,7 @@ watchEffect(async () => {
       isLogin.value = true;
       userProfile.avatar = res.avatar;
       userProfile.username = res.username;
+      userProfile.email = res.email;
       auth.user = res;
     }
   } catch (error) {
