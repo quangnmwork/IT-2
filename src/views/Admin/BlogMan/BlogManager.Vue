@@ -19,9 +19,6 @@ const blogFilter = computed(() => {
   return post;
 });
 </script>
-<script lang="ts">
-export default { name: 'BlogManager' };
-</script>
 
 <template>
   <div>
@@ -89,12 +86,11 @@ export default { name: 'BlogManager' };
             </thead>
 
             <tbody class="bg-white">
-              <tr
+              <BlogItem
                 v-for="(_u, index) in blogFilter"
                 :key="index"
-              >
-                <BlogItem :blog="blogFilter[index]" />
-              </tr>
+                :blog="blogFilter[index]"
+              />
             </tbody>
           </table>
         </div>
