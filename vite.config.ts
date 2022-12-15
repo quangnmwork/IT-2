@@ -1,5 +1,5 @@
 import AutoImport from 'unplugin-auto-import/vite';
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
@@ -27,7 +27,6 @@ export default defineConfig({
       dirs: ['./src/*'],
       vueTemplate: true,
     }),
-    splitVendorChunkPlugin(),
   ],
   resolve: {
     alias: {
