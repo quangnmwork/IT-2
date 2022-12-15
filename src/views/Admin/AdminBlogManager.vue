@@ -6,7 +6,7 @@
   </AdminHome>
 </template>
 <script>
-import BlogManager from './BlogMan/BlogManager.vue';
+import BlogManager from '~/views/Admin/BlogMan/BlogManager.vue';
 export default {
   components: { BlogManager },
 };
