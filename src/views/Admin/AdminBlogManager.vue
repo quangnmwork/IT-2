@@ -5,6 +5,9 @@
     </template>
   </AdminHome>
 </template>
-<script setup lang="ts">
+<script lang="ts">
 import BlogMain from './BlogMan/BlogManager.vue';
+export default {
+  components: { BlogMain },
+};
 </script>
