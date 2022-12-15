@@ -1,13 +1,7 @@
 <template>
   <AdminHome>
     <template #content>
-      <blog-main />
+      <BlogManager></BlogManager>
     </template>
   </AdminHome>
 </template>
-<script lang="ts">
-import BlogMain from './BlogMan/BlogManager.vue';
-export default {
-  components: { BlogMain },
-};
-</script>
