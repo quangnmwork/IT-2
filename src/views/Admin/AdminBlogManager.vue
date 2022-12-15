@@ -1,10 +1,10 @@
 <template>
   <AdminHome>
     <template #content>
-      <BlogManager />
+      <blog-main />
     </template>
   </AdminHome>
 </template>
 <script setup lang="ts">
-import BlogManager from './BlogMan/BlogManager.vue';
+import BlogMain from './BlogMan/BlogManager.vue';
 </script>

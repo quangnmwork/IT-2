@@ -19,6 +19,11 @@ const blogFilter = computed(() => {
   return post;
 });
 </script>
+<script lang="ts">
+export default {
+  name: 'BlogMain',
+};
+</script>
 
 <template>
   <div>
